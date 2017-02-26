@@ -27,6 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define 'blog' do |machine|
     machine.vm.hostname = HOSTNAME
     machine.vm.network 'forwarded_port', :guest => 5678, :host => 5678, :auto_correct => true  # for livereload
+    machine.vm.network 'forwarded_port', :guest => 4000, :host => 4000, :auto_correct => true  # for Jekyll
     machine.vm.network 'forwarded_port', :guest => 5000, :host => 5000, :auto_correct => true  # for yard documentation
 
     machine.vm.box = 'ubuntu/trusty64'
