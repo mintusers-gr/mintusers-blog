@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cd /blog
+cd /vagrant/blog
 
 # Kill everything that use port 4000
 fuser -k 4000/tcp
@@ -10,4 +10,6 @@ bundle exec jekyll serve  --watch \
     --destination /vagrant/_site \
     --livereload \
     --host 0.0.0.0 \
+    --trace \
+    --incremental
 

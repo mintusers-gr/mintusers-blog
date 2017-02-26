@@ -33,10 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     machine.vm.box = 'ubuntu/trusty64'
     machine.vm.box_check_update = false
 
-    # NFS require private networking
     machine.vm.network 'private_network', ip: IP
-    machine.vm.synced_folder 'blog', '/blog'
-
     machine.hostmanager.aliases = [ HOSTNAME ]
   end
 

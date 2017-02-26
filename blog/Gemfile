@@ -20,6 +20,7 @@ ruby RUBY_VERSION
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem "github-pages", require: false
+  gem "github-pages"
   gem 'jekyll-livereload'
+  gem 'jekyll-theme-architect'
 end

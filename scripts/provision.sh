@@ -14,7 +14,7 @@ apt-get -y install \
     nodejs \
     language-pack-el \
     nginx \
-    inotify-tools
+    git
 
 apt-get -y autoremove
 
