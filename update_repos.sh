@@ -7,6 +7,10 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
+# Get last commit message
+last_commit=$(git log -1 --pretty=%B)
+commit_date=$(date +' at %m-%d-%Y')
+commit_message="${last_commit}${commit_date}"
 
 WORK_DIR=`mktemp -d  /tmp/jekyllblog.XXXXXXXXXX`
 echo -e "${GREEN}Clonning repository into ${WORK_DIR}${NC}"
@@ -17,7 +21,8 @@ function cleanup {
   echo "Deleted temp working directory $WORK_DIR"
 }
 
-#trap cleanup EXIT
+trap cleanup EXIT
+
 
 # Clone the repository
 pushd ${WORK_DIR}
@@ -36,8 +41,8 @@ echo -e "${GREEN}Generating commit ${NC}"
 pushd "${WORK_DIR}/mintusers-gr.github.io"
 git add .
 git status
-commit=$(date +'Site updated at %m-%d-%Y')
-git commit -m "${commit}"
+
+git commit -m "${commit_message}"
 
 echo -e "${GREEN}Pushing to remote${NC}: ${GITHUB_REPONAME_BLOG}"
 git push origin master
