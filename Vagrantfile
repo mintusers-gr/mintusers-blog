@@ -35,7 +35,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # NFS require private networking
     machine.vm.network 'private_network', ip: IP
-    machine.vm.synced_folder 'blog', '/blog', :type => 'nfs'
+    machine.vm.synced_folder 'blog', '/blog'
 
     machine.hostmanager.aliases = [ HOSTNAME ]
   end

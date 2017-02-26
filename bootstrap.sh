@@ -23,16 +23,6 @@ else
     sudo apt-get install -y ${VBOX_PACKAGE}
 fi
 
-printf "${GREEN} ** Installing NFS server${NC}: "
-if debInst " nfs-kernel-server"; then
-    printf "  is installed\n"
-else
-    printf " ... installing\n"
-    sudo apt-get install  nfs-kernel-server
-fi
-
-
-
 printf "${GREEN} ** Installing Vagrant${NC}: "
 if debInst "vagrant"; then
     printf "  is installed\n"
@@ -42,9 +32,6 @@ else
     echo "${GREEN} *** Installing vagrant plugins${NC}"
     sudo vagrant plugin install vagrant-vbguest
     sudo vagrant plugin install vagrant-hostmanager
-#    sudo vagrant plugin install vagrant-bindfs
-    sudo vagrant plugin install vagrant-notify-forwarder
-
 fi
 
 echo -e "${GREEN} ** Running Vagrant${NC}"
