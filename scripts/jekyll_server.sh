@@ -9,7 +9,4 @@ mkdir -p /vagrant/tmp/run/  /vagrant/tmp/log
 bundle exec jekyll serve  --watch \
     --destination /vagrant/_site \
     --livereload \
-    --host 0.0.0.0 \
-    --trace \
-    --incremental
-
+    --host 0.0.0.0
