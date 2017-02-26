@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: About it
 permalink: /about/
 ---
 
@@ -12,4 +12,4 @@ You can find the source code for the Jekyll new theme at:
 
 You can find the source code for Jekyll at
 {% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+[jekyll](https://github.com/jekyll/jekyll)  
