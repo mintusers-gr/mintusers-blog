@@ -9,7 +9,7 @@
 # Description:       Enable service provided by daemon.
 ### END INIT INFO
 
-dir="/blog"
+dir="/vagrant/blog"
 cmd="/vagrant/scripts/jekyll_server.sh"
 user="vagrant"
 

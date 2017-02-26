@@ -21,6 +21,7 @@ desc "Generate and publish blog to gh-pages"
 task :publish => [:generate] do
   hostname = Socket.gethostbyname(Socket.gethostname).first
   if "local.mintusers.me" != hostname
+    system "git push origin master"
     Dir.mktmpdir do |tmp|
       cp_r "../_site/.", tmp
 

@@ -9,7 +9,7 @@
 # Description:       Enable service provided by daemon.
 ### END INIT INFO
 
-dir="/blog"
+dir="/vagrant/blog"
 cmd="yard server --gems --port 5000 --bind 0.0.0.0"
 user="vagrant"
 

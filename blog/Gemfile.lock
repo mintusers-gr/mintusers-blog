@@ -205,10 +205,10 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll-livereload
-  jekyll-theme-architect
+  minima
 
 RUBY VERSION
-   ruby 2.1.9p490
+   ruby 2.4.0p0
 
 BUNDLED WITH
    1.14.5

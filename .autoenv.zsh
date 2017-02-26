@@ -10,6 +10,7 @@ NC='\033[0m' # No Color
 source .env
 echo "Jekyll activated:"
 echo -e "   Run '${GREEN}vagrant up${NC}' to start the blog"
+echo -e "   Run '${GREEN}vagrant ssh${NC}' to login into the virtual machine"
 echo -e "   Run '${GREEN}vagrant halt${NC}' to stop the virtual machine"
 echo -e "Now open http://local.mintusers.me "
 echo -e "Full livereload support will provided.\n"
