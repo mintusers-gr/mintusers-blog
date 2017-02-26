@@ -6,5 +6,5 @@ NC='\033[0m' # No Color
 printf "${GREN}Ready to serve.${NC}\n"
 printf "   type jserv to start server\n\n"
 
-alias jserv='/vagrant/scripts/server.sh'
+alias jserv='/vagrant/scripts/jekyll_server.sh'
 cd /blog
