@@ -1,0 +1,17 @@
+### Jekyll ###
+_site/
+.sass-cache/
+.jekyll-metadata
+
+### JetBrains ###
+.idea/
+
+
+### bundler ###
+.bundle/
+
+### environment ###
+.env
+
+### Vagrant ###
+.vagrant
