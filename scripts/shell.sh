@@ -1,5 +1,10 @@
 #!/bin/bash
-echo "Ready to serve"
-alias serve='jekyll serve --host 0.0.0.0 --force_polling'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+printf "${GREN}Ready to serve.${NC}\n"
+printf "   type jserv to start server\n\n"
+
+alias jserv='/vagrant/scripts/server.sh'
 cd /blog
-echo "jekyll serve --watch 4000 --destination /var/www/html"

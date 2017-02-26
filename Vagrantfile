@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 IP = '192.168.10.50'
-HOSTNAME = 'mintusers.local'
+HOSTNAME = 'local.mintusers.me'
 
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -27,8 +27,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define 'blog' do |machine|
     machine.vm.hostname = HOSTNAME
     machine.vm.network 'forwarded_port', :guest => 4000, :host => 4000, :auto_correct => true
-    machine.vm.network 'forwarded_port', :guest => 80,   :host => 8080, :auto_correct => true
-    machine.vm.network 'forwarded_port', :guest => 443,  :host => 8081, :auto_correct => true
+    machine.vm.network 'forwarded_port', :guest => 5678, :host => 5678, :auto_correct => true
+    machine.vm.network 'forwarded_port', :guest => 5000, :host => 5000, :auto_correct => true
 
     machine.vm.box = 'ubuntu/trusty64'
 

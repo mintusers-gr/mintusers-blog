@@ -43,6 +43,7 @@ else
     sudo vagrant plugin install vagrant-vbguest
     sudo vagrant plugin install vagrant-hostmanager
     sudo vagrant plugin install vagrant-bindfs
+    sudo vagrant plugin install vagrant-notify-forwarder
 
 fi
 
