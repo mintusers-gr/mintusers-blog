@@ -9,7 +9,7 @@ NC='\033[0m' # No Color
 
 # Get last commit message
 last_commit=$(git log -1 --pretty=%B)
-commit_date=$(date +' at %m-%d-%Y')
+commit_date=$(date +' at %m-%d-%Y %H:%m')
 commit_message="${last_commit}${commit_date}"
 
 WORK_DIR=`mktemp -d  /tmp/jekyllblog.XXXXXXXXXX`
