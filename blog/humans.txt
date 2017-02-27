@@ -1,0 +1,13 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Talos -- Giannis Tsagatakis -- jtsagata
+
+# THANKS
+
+    For the fish
+
+# TECHNOLOGY COLOPHON
+    Jekyll
