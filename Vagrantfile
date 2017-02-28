@@ -44,4 +44,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :shell, path: "bin/machine_provision.sh", keep_color: true
 
+  # So you can use your private keys inside the box
+  config.ssh.forward_agent = true
 end

@@ -78,6 +78,7 @@ else
   sudo -u vagrant -H git config --global user.email "${GIT_EMAIL}"
   sudo -u vagrant -H git config --global user.name  "${GIT_NAME}"
   sudo -u vagrant -H git config --global color.ui true
+  sudo -u vagrant -H git config --global push.default simple
 fi
 
 if ! grep -q shellrc.sh /home/vagrant/.bashrc
@@ -85,5 +86,8 @@ then
     echo "source /vagrant/bin/shellrc.sh" >>  /home/vagrant/.bashrc
     printInfo  "** Startup bash file .bashrc updated"
 fi
+
+ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+ssh -T git@github.com
 
 source "/vagrant/bin/machine_provision_local.sh"

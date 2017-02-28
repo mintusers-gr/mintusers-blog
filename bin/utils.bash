@@ -137,6 +137,9 @@ function goto_repo_root()
       echo "Aeems the git root is at your home directory."
      fi
    else
-    echo "Not inside a git repository"
+    if [ ! -d .git ]
+    then
+      echo "Not inside a git repository"
+    fi
    fi
 }
