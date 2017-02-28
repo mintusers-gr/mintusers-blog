@@ -9,6 +9,10 @@ You can browse the generated files here:
  ```
  sudo bin/dev_machine_setup.sh
  ```
+ 2. Login to your new machine
+ ```
+ bin/guest_login
+ ```
  2. Setup git and your github account
  3. Generate your ssh keys and upload public key to github
  4. Run the virtual appliance

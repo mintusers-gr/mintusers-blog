@@ -30,5 +30,6 @@ then
   echo "  vagrant up"
 else
   printInfo "The box ${BOX_FILE} already exists."
-  printInfo "Delete that file and optionaly update version first."
+  echo -e "Delete that file and optionaly update version first."
+  echo -e "type: rm .boxes/${BOX_FILE}.box\n"
 fi

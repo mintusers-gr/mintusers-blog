@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+if [ -d /vagrant ]
+then
+  source "/vagrant/bin/utils.bash"
+  printInfo "*************************************************"
+  printInfo "* Don't run this on the guest machine please!   *"
+  printInfo "*************************************************"
+  exit
+else
+  source "$(dirname "${BASH_SOURCE[0]}")/utils.bash"
+fi
+
+source "$(dirname "${BASH_SOURCE[0]}")/../.env"
+goto_repo_root
+
+if [ "{BOX_NAME}" == "" ]
+then
+  echo "ERROR! .env file missing"
+  exit
+fi
+
+status=$(vagrant global-status | grep ${BOX_NAME} | awk '{print $4}')
+if [ "${status}" == "poweroff" ]
+then
+  printInfo "Machine is power off. Power ON ..."
+  vagrant up
+fi
+
+if [ "${status}" == "saved" ]
+then
+  printInfo "Machine is suspended. Lets restore ..."
+  vagrant resume
+fi
+
+status=$(vagrant global-status | grep ${BOX_NAME} | awk '{print $4}')
+if [ "${status}" == "running" ]
+then
+  printInfo "Machine is running"
+  vagrant ssh
+else
+  printInfo "I can't login to machine. Check configuration"
+fi

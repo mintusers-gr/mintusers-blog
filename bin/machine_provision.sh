@@ -68,7 +68,17 @@ geminstall puma
 geminstall github
 geminstall github_cli
 
-
+source /vagrant/.env
+if [ "${GIT_NAME}"  == "" ]
+then
+  printInfo  "** ERROR: Failed to setup git. Please update .env file and run vagrant provision"
+  exit
+else
+  printInfo  "** Setup git and github"
+  sudo -u vagrant -H git config --global user.email "${GIT_EMAIL}"
+  sudo -u vagrant -H git config --global user.name  "${GIT_NAME}"
+  sudo -u vagrant -H git config --global color.ui true
+fi
 
 if ! grep -q shellrc.sh /home/vagrant/.bashrc
 then
