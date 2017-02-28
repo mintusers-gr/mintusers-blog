@@ -1,0 +1,6 @@
+# Virtual machine configuration
+BOX_IP=192.168.10.80
+BOX_NAME=jekyll
+BOX_HOSTNAME=jekyll.mintusers.me
+BOX_MEM=512
+BOX_CPU=2

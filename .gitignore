@@ -14,5 +14,6 @@ _site/
 .env
 
 ### Vagrant ###
-.vagrant
+.vagrant/
+.boxes/
 tmp

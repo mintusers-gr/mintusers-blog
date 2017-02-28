@@ -5,11 +5,13 @@ You can browse the generated files here:
 [mintusers-gr](https://mintusers-gr.github.io)
  
 ## Setup
- 1. Run ./bootstrap.sh to install virtualbox and vagrant
+ 1. Run ```dev/machine_setup.sh``` to install virtualbox and vagrant
+ ```
+ sudo bin/dev_machine_setup.sh
+ ```
  2. Setup git and your github account
- 3. Generate a personal token and create an .env file
- 4. Generate your ssh keys and uplaoad public key to github
- 5. Run the virtual appliance
+ 3. Generate your ssh keys and upload public key to github
+ 4. Run the virtual appliance
 
 Some useful vagrant commands
  ```bash
