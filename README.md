@@ -6,10 +6,12 @@ You can browse the generated files here:
  
 ## Setup
  1. Run ```dev/machine_setup.sh``` to install virtualbox and vagrant 
+ 
  ```
  sudo bin/dev_machine_setup.sh
  ```
  2. Login to your new machine 
+ 
  ```
  bin/guest_login
  ```
