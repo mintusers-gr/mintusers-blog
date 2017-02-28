@@ -5,11 +5,11 @@ You can browse the generated files here:
 [mintusers-gr](https://mintusers-gr.github.io)
  
 ## Setup
- 1. Run ```dev/machine_setup.sh``` to install virtualbox and vagrant
+ 1. Run ```dev/machine_setup.sh``` to install virtualbox and vagrant 
  ```
  sudo bin/dev_machine_setup.sh
  ```
- 2. Login to your new machine
+ 2. Login to your new machine 
  ```
  bin/guest_login
  ```
