@@ -53,6 +53,7 @@ installAptGetPackage "curl"
 installAptGetPackage "zsh"
 installAptGetPackage "firefox"
 installAptGetPackage "gitg"
+installAptGetPackage "silversearcher-ag"
 
 printInfo  "** Remove orphan packages"
 apt-get -y autoremove
@@ -109,7 +110,19 @@ chsh vagrant -s /usr/bin/zsh
 sudo -u vagrant -H sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 # activate plugins
 sed -i 's/plugins=(git)/plugins=(git,github,ruby)/g' /home/vagrant/.zshrc
-echo "source /vagrant/bin/shellrc.sh" >>  /home/vagrant/.zshrc
+if  ! grep -q shellrc.sh /home/vagrant/.zshrc
+then
+  echo "source /vagrant/bin/shellrc.sh" >>  /home/vagrant/.zshrc
+fi
 
+printInfo  "** Customize motd"
+rm /etc/update-motd.d/10-help-text
+rm /etc/update-motd.d/91-release-upgrade
+rm /etc/update-motd.d/51-cloudguest
+if [ grep -q LandscapeLink /etc/update-motd.d/50-landscape-sysinfo ]
+then
+  sed -i 's/landscape-sysinfo/landscape-sysinfo --exclude-sysinfo-plugins=LandscapeLink/g' /etc/update-motd.d/50-landscape-sysinfo
+fi
+run-parts /etc/update-motd.d/
 
 source "/vagrant/bin/machine_provision_local.sh"

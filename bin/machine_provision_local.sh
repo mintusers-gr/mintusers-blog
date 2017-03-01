@@ -18,7 +18,7 @@ fi
 
 printInfo "** Updating local Gemfile"
 cd /vagrant/jekyll-blog
-sudo -u vagrant -H bundle install
+sudo -u vagrant -H bundle install --binstubs --quiet
 bundle show
 
 printInfo "** Site specific provision"

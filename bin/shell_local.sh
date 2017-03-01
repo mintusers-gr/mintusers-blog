@@ -18,3 +18,4 @@ eval "$(hub alias -s)"
 
 cd /vagrant
 printInfo "Ready!"
+echo

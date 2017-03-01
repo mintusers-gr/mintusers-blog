@@ -8,7 +8,8 @@ _site/
 
 
 ### bundler ###
-.bundle/
+jekyll-blog/.bundle/
+jekyll-blog/bin/
 
 ### environment ###
 .env
