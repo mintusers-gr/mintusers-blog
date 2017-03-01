@@ -16,4 +16,9 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+printInfo "** Updating local Gemfile"
+cd /vagrant/jekyll-blog
+sudo -u vagrant -H bundle install
+bundle show
+
 printInfo "** Site specific provision"

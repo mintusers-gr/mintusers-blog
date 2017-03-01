@@ -48,6 +48,9 @@ installAptGetPackage "git"
 installAptGetPackage "language-pack-el"
 installAptGetPackage "liblzma-dev"
 installAptGetPackage "zlib1g-dev"
+installAptGetPackage "wget"
+installAptGetPackage "curl"
+installAptGetPackage "zsh"
 
 printInfo  "** Update System gems"
 gem update --system
@@ -87,7 +90,21 @@ then
     printInfo  "** Startup bash file .bashrc updated"
 fi
 
+# SSH for github
 ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 ssh -T git@github.com
+
+# A better github manage tool
+printInfo  "** Setup hub tool"
+mv /home/vagrant/hub /usr/local/bin/
+
+printInfo  "** Setup zshell"
+chsh vagrant -s /usr/bin/zsh
+
+sudo -u vagrant -H sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# activate plugins
+sed -i 's/plugins=(git)/plugins=(git,github,ruby)/g' /home/vagrant/.zshrc
+echo "source /vagrant/bin/shellrc.sh" >>  /home/vagrant/.zshrc
+
 
 source "/vagrant/bin/machine_provision_local.sh"

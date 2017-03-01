@@ -17,7 +17,7 @@ function printInfo() {
 }
 
 source /vagrant/.env
-PS1="\033[1;36m${BOX_NAME}\033[0m: \w \$ "
+#PS1="\033[1;36m${BOX_NAME}\033[0m: \w \$ "
 
 cd /vagrant
 printInfo "Welcome to ${BOX_HOSTNAME}"

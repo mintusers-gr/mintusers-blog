@@ -11,9 +11,9 @@ else
   source "/vagrant/bin/utils.bash"
 fi
 
-printInfo "** Updating local Gemfile"
-cd /vagrant/blog
-sudo -u vagrant bundle install
-bundle show
 
+# Use hub and not git
+eval "$(hub alias -s)"
+
+cd /vagrant
 printInfo "Ready!"

@@ -4,3 +4,8 @@ BOX_NAME=jekyll
 BOX_HOSTNAME=jekyll.mintusers.me
 BOX_MEM=512
 BOX_CPU=2
+
+# GIT Setup
+GIT_NAME="Lakis Lalakis"
+GIT_EMAIL="lalakis@protonmail.com"
+GITHUB_USER="lalakis"

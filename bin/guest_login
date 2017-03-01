@@ -36,8 +36,8 @@ fi
 status=$(vagrant global-status | grep ${BOX_NAME} | awk '{print $4}')
 if [ "${status}" == "running" ]
 then
-  printInfo "Machine is running"
+  printInfo "Machine is running. Logging in ..."
   vagrant ssh
 else
-  printInfo "I can't login to machine. Check configuration"
+  printInfo "I can't login to machine. Have you create it?"
 fi
