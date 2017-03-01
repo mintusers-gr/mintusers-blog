@@ -1,5 +1,0 @@
-#
-# copy this to file /etc/sudoers.d/vagrant_hostmanager
-#
-Cmnd_Alias VAGRANT_HOSTMANAGER_UPDATE = /bin/cp /home/talos/.vagrant.d/tmp/hosts.local /etc/hosts
-adm ALL=(root) NOPASSWD: VAGRANT_HOSTMANAGER_UPDATE

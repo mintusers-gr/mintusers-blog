@@ -125,4 +125,4 @@ then
 fi
 run-parts /etc/update-motd.d/
 
-source "/vagrant/bin/machine_provision_local.sh"
+source "/vagrant/bin/provision_local.sh"

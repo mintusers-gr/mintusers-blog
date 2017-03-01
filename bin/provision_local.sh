@@ -21,4 +21,8 @@ cd /vagrant/jekyll-blog
 sudo -u vagrant -H bundle install --binstubs --quiet
 bundle show
 
-printInfo "** Site specific provision"
+printInfo "** Run as service at startup"
+cp /vagrant/bin/.templates/jekyll_service /etc/init.d/jekyll_service
+chmod +x /etc/init.d/jekyll_service
+update-rc.d jekyll_service defaults
+service jekyll_service start

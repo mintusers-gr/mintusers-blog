@@ -6,17 +6,17 @@
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Start daemon at boot time
-# Description:       Enable service provided by daemon.
+# Description:       Enable Jekyll as service service provided by daemon.
 ### END INIT INFO
 
-dir="/vagrant/blog"
-cmd="/vagrant/scripts/jekyll_server.sh"
+dir="/vagrant"
+cmd="/vagrant/bin/jekyll_server.sh"
 user="vagrant"
 
 name=`basename $0`
-pid_file="/vagrant/tmp/run/$name.pid"
-stdout_log="/vagrant/tmp/log/$name.log"
-stderr_log="/vagrant/tmp/log/$name.err"
+pid_file="/vagrant/.vagrant/$name.pid"
+stdout_log="/vagrant/.vagrant/$name.log"
+stderr_log="/vagrant/.vagrant/$name.err"
 
 get_pid() {
     cat "$pid_file"

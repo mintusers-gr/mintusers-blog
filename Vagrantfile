@@ -12,13 +12,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   BOX_MEM = ENV['BOX_MEM'] || max_memory / 4
 
   # Manage /etc/hosts file
-  config.hostmanager do |h|
-    h.enabled = true
-    h.manage_host = true
-    h.manage_guest = true
-    h.ignore_private_ip = false
-    h.include_offline = false
-  end
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+  config.hostmanager.manage_guest = true
+  config.hostmanager.ignore_private_ip = false
+  config.hostmanager.include_offline = true
 
 
   config.vm.provider :virtualbox do |vb, override|
@@ -39,10 +37,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     machine.vm.box_check_update = false
 
     machine.vm.network 'private_network', ip: BOX_IP
+
     machine.hostmanager.aliases = [ BOX_HOSTNAME ]
   end
 
-  config.vm.provision "file", source: "/usr/local/bin/hub", destination: "hub"
+    config.vm.provision "file", source: "/usr/local/bin/hub", destination: "hub"
   config.vm.provision :shell, path: "bin/machine_provision.sh", keep_color: true
 
   # So you can use your private keys inside the box

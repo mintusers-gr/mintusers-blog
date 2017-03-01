@@ -14,9 +14,13 @@ fi
 /vagrant/bin/check_config.sh
 
 source /vagrant/.env
+export PATH="/vagrant/jekyll-blog/bin:/vagrant/bin:$PATH"
 
 # Use hub and not git
 eval "$(hub alias -s)"
+
+unalias ag 2>/dev/null
+alias yard-server="yard server --gems --port 5000 --bind 0.0.0.0"
 
 cd /vagrant
 printInfo "Ready!"

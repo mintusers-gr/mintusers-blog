@@ -16,6 +16,7 @@
 
 
 repository: mintusers-gr/mintusers-gr.github.io
+destination: ../www
 
 title: My new awesome title
 email: your-email@domain.com
@@ -43,3 +44,4 @@ theme: minima
 exclude:
   - Gemfile
   - Gemfile.lock
+  - bin
