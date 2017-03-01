@@ -10,6 +10,12 @@ then
 else
   source "$(dirname "${BASH_SOURCE[0]}")/utils.bash"
 fi
+
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
 goto_repo_root
 
 # Look for a newer version here:
@@ -79,7 +85,7 @@ fi
 
 hubfile_url="https://github.com/github/hub/releases/download/v2.3.0-pre9/hub-linux-amd64-2.3.0-pre9.tgz"
 hubfile_file="hub-linux-amd64-2.3.0-pre9.tgz"
-if [ -f /usr/local/bin/hub ]
+if [ ! -f /usr/local/bin/hub ]
 then
   printInfo "** Installing hub tool"
   wget  -c --quiet --show-progress ${hubfile_url} -O /tmp/${hubfile_file}
