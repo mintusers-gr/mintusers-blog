@@ -27,10 +27,11 @@ You can browse the generated files here:
 
  4. Run the virtual appliance
 
-Some useful vagrant commands
- ```bash
-$ vagrant up                      # To start VM
-$ vagrant suspend                 # To suspend VM
+### Some useful vagrant commands
+ ```
+$ vagrant up                      # To start the VM
+$ vagrant ssh                     # To login into the VM
+$ vagrant suspend                 # To suspend the VM
 $ vagrant resume                  # To resume a suspended VM
 $ vagrant provision               # To provision(setup) the machine
 $ vagrant halt                    # To stop VM
