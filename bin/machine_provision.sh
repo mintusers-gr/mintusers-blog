@@ -51,6 +51,11 @@ installAptGetPackage "zlib1g-dev"
 installAptGetPackage "wget"
 installAptGetPackage "curl"
 installAptGetPackage "zsh"
+installAptGetPackage "firefox"
+installAptGetPackage "gitg"
+
+printInfo  "** Remove orphan packages"
+apt-get -y autoremove
 
 printInfo  "** Update System gems"
 gem update --system

@@ -11,6 +11,7 @@ else
   source "/vagrant/bin/utils.bash"
 fi
 
+source /vagrant/.env
 
 # Use hub and not git
 eval "$(hub alias -s)"

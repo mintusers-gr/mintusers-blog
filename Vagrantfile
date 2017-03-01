@@ -44,6 +44,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "file", source: "/usr/local/bin/hub", destination: "hub"
   config.vm.provision :shell, path: "bin/machine_provision.sh", keep_color: true
+
   # So you can use your private keys inside the box
   config.ssh.forward_agent = true
+  # So you can run firefox
+  config.ssh.forward_x11 = true
 end
