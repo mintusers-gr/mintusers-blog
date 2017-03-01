@@ -10,7 +10,3 @@ GIT_NAME="Lakis Lalakis"
 GIT_EMAIL="lalakis@protonmail.com"
 GITHUB_USER="lalakis"
 
-# Github token
-# https://help.github.com/articles/creating-an-access-token-for-command-line-use/
-JEKYLL_GITHUB_TOKEN="8277f7..6bb5c5"
-

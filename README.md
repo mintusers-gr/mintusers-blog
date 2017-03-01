@@ -22,7 +22,7 @@ You can browse the generated files here:
  2. Login to your new machine
  
  ```
- bin/guest_login
+ bin/guest-login
  ```
 
  4. Run the virtual appliance

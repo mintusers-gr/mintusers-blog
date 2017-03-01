@@ -41,8 +41,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     machine.hostmanager.aliases = [ BOX_HOSTNAME ]
   end
 
-    config.vm.provision "file", source: "/usr/local/bin/hub", destination: "hub"
-  config.vm.provision :shell, path: "bin/machine_provision.sh", keep_color: true
+  # This will copy the hub command from host to guest
+  config.vm.provision "file", source: "/usr/local/bin/hub", destination: "hub"
+  config.vm.provision :shell, path: "bin/.provision/machine_provision.sh", keep_color: true
 
   # So you can use your private keys inside the box
   config.ssh.forward_agent = true

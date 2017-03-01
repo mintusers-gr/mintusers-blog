@@ -36,7 +36,7 @@ gems:
   - jekyll-relative-links
   - jekyll-seo-tag
   - jekyll-sitemap
-   - jekyll-last-modified-at
+  - jekyll-last-modified-at
   - jemoji
 markdown: kramdown
 reload_port: 5678

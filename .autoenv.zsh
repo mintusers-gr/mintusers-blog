@@ -8,8 +8,8 @@ source .env
 export ANSIBLE_NOCOWS=1
 
 # Alias
-ssh_cmd=`pwd`/bin/guest_login
-alias sshguest="${ssh_cmd}"
+ssh_cmd=`pwd`/bin/guest-login
+alias ssh-guest="${ssh_cmd}"
 
 # Banner
 RED='\033[0;31m'

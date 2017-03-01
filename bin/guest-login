@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -e
+
+if [ -d /vagrant ]
+then
+  echo "$(tput setaf 6)*************************************************$(tput sgr0)"
+  echo "$(tput setaf 6)*         You are allready logged dude!         *$(tput sgr0)"
+  echo "$(tput setaf 6)*************************************************$(tput sgr0)"
+  exit
+fi
+
+vagrant_dir="$(dirname "${BASH_SOURCE[0]}")/.."
+source "${vagrant_dir}/.env"
+${vagrant_dir}/bin/check-jekyll-config
+
+guest_status=$(vagrant global-status | grep "${BOX_NAME}" | awk '{print $4}')
+case ${guest_status} in
+"poweroff")
+  echo "$(tput setaf 4)Machine is power off. Power ON ...$(tput sgr0)"
+  vagrant up
+  vagarnt ssh
+  ;;
+"saved")
+  echo "$(tput setaf 3)Machine is suspended. Lets restore ...$(tput sgr0)"
+  vagrant resume
+  vagrant ssh
+  ;;
+"running")
+  echo "$(tput setaf 2)Logging to guest$(tput sgr0)"
+  vagrant ssh
+  ;;
+*)
+  echo "$(tput setaf 1)** Can't login to guest. Status: ${guest_status} $(tput sgr0)"
+  ;;
+esac

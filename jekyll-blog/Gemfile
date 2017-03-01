@@ -1,24 +1,17 @@
 source "https://rubygems.org"
 ruby RUBY_VERSION
 
-#gem 'jekyll', '~> 3.4'
+gem 'jekyll', '~> 3.4'
 
 group :jekyll_plugins do
-  # https://pages.github.com/versions/
-  gem 'github-pages', '~> 124'
-
-  # Extra non github-pages gems
-  gem 'jekyll-last-modified-at', '~> 1.0', '>= 1.0.1'
-
-  # Disabled
-  # gem 'jekyll-mentions', '~> 1.2'
-  # gem 'jekyll-readme-index', '~> 0.1.0'
-  # gem 'jekyll-redirect-from', '~> 0.12.1'
-  # gem 'jekyll-html-pipeline', '~> 1.0'
-
-  # Themes
-  gem 'jekyll-swiss', '~> 0.4.0'
-
-  # Tools
+  gem 'jekyll-last-modified-at'
   gem 'jekyll-livereload'
+  gem 'jekyll-feed'
+  gem 'jekyll-gist'
+  gem 'jekyll-relative-links'
+  gem 'jekyll-seo-tag'
+  gem 'jekyll-sitemap'
+  gem 'jemoji'
+  gem 'minima'
+  gem 'jekyll-sitemap'
 end

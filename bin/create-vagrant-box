@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
+set -e
 
 if [ -d /vagrant ]
 then
   source "/vagrant/bin/utils.bash"
   printInfo "*************************************************"
-  printInfo "* Don't run this on the guest machine please!   *"
+  printInfo "* Don't run this on the virtual machine please! *"
   printInfo "*************************************************"
   exit
 else
-  source "$(dirname "${BASH_SOURCE[0]}")/utils.bash"
+  source "$(dirname "${BASH_SOURCE[0]}")/.provision/utils.bash"
 fi
+
 
 BOX_FILE="vagrant-jekyll-v0.1"
 

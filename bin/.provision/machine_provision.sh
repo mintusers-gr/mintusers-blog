@@ -1,20 +1,21 @@
 #!/bin/bash
+set -e
 
 if [ ! -d /vagrant ]
 then
-  source "$(dirname "${BASH_SOURCE[0]}")/utils.bash"
-  printInfo "*************************************************"
-  printInfo "* Don't run this on the host machine please!   *"
-  printInfo "*************************************************"
+  echo "$(tput setaf 1)*************************************************$(tput sgr0)"
+  echo "$(tput setaf 1)* Don't run this on the host machine please!    *$(tput sgr0)"
+  echo "$(tput setaf 1)*************************************************$(tput sgr0)"
   exit
-else
-  source "/vagrant/bin/utils.bash"
 fi
 
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root" 1>&2
    exit 1
 fi
+
+source /vagrant/bin/.provision/utils.bash
+
 
 # Installing repositories and PPAs
 installAptGetPackage "python-software-properties"
@@ -77,52 +78,41 @@ geminstall puma
 geminstall github
 geminstall github_cli
 
-source /vagrant/.env
-if [ "${GIT_NAME}"  == "" ]
-then
-  printInfo  "** ERROR: Failed to setup git. Please update .env file and run vagrant provision"
-  exit
-else
-  printInfo  "** Setup git and github"
-  sudo -u vagrant -H git config --global user.email "${GIT_EMAIL}"
-  sudo -u vagrant -H git config --global user.name  "${GIT_NAME}"
-  sudo -u vagrant -H git config --global color.ui true
-  sudo -u vagrant -H git config --global push.default simple
-fi
-
-if ! grep -q shellrc.sh /home/vagrant/.bashrc
-then
-    echo "source /vagrant/bin/shellrc.sh" >>  /home/vagrant/.bashrc
-    printInfo  "** Startup bash file .bashrc updated"
-fi
-
 # SSH for github
-ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+ssh-keyscan -H github.com >> ~/.ssh/known_hosts 2> /dev/null
+set +e
+# This command will always fail
 ssh -T git@github.com
+set -e
 
 # A better github manage tool
 printInfo  "** Setup hub tool"
 mv /home/vagrant/hub /usr/local/bin/
 
-printInfo  "** Setup zshell"
+printInfo  "** Setup ZSH"
 chsh vagrant -s /usr/bin/zsh
+if [ ! -d /home/vagrant/.oh-my-zsh ] ; then
+  sudo -u vagrant -H sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
 
-sudo -u vagrant -H sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-# activate plugins
-sed -i 's/plugins=(git)/plugins=(git,github,ruby)/g' /home/vagrant/.zshrc
-if  ! grep -q shellrc.sh /home/vagrant/.zshrc
-then
-  echo "source /vagrant/bin/shellrc.sh" >>  /home/vagrant/.zshrc
+if [ ! -f /home/vagrant/.zshrc ] ; then
+  sudo -u vagrant cp /vagrant/bin/.templates/.zshrc /home/vagrant
 fi
 
 printInfo  "** Customize motd"
-rm /etc/update-motd.d/10-help-text
-rm /etc/update-motd.d/91-release-upgrade
-rm /etc/update-motd.d/51-cloudguest
-if [ grep -q LandscapeLink /etc/update-motd.d/50-landscape-sysinfo ]
-then
-  sed -i 's/landscape-sysinfo/landscape-sysinfo --exclude-sysinfo-plugins=LandscapeLink/g' /etc/update-motd.d/50-landscape-sysinfo
-fi
-run-parts /etc/update-motd.d/
+rm -f /etc/update-motd.d/10-help-text
+rm -f /etc/update-motd.d/91-release-upgrade
+rm -f /etc/update-motd.d/51-cloudguest
+cp /vagrant/bin/.templates/50-landscape-sysinfo /etc/update-motd.d/50-landscape-sysinfo
+run-parts /etc/update-motd.d/ > /dev/null
 
-source "/vagrant/bin/provision_local.sh"
+printInfo "** Updating local Gemfile"
+cd /vagrant/jekyll-blog
+sudo -u vagrant -H bundle install --binstubs --quiet
+bundle show
+
+printInfo "** Run as service at startup"
+cp /vagrant/bin/.templates/jekyll_service /etc/init.d/jekyll_service
+chmod +x /etc/init.d/jekyll_service
+update-rc.d jekyll_service defaults
+service jekyll_service start
