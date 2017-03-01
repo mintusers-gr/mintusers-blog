@@ -11,6 +11,8 @@ else
   source "/vagrant/bin/utils.bash"
 fi
 
+/vagrant/bin/check_config.sh
+
 source /vagrant/.env
 
 # Use hub and not git
@@ -19,3 +21,4 @@ eval "$(hub alias -s)"
 cd /vagrant
 printInfo "Ready!"
 echo
+
