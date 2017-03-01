@@ -1,8 +1,11 @@
 # About
-This repository generate the static blog repository  [mintusers-gr/mintusers-gr.github.io](https://github.com/mintusers-gr/mintusers-gr.github.io)
+Create a local development environment inside a virtual machine to generate the blog as static pages.
 
-You can browse the generated files here:
-[mintusers-gr](https://mintusers-gr.github.io)
+This repository is hosted at github at : [mintusers-gr/mintusers-blog](https://github.com/mintusers-gr/mintusers-blog)
+
+The static pages is located at another repository at : [mintusers-gr/mintusers-gr.github.io](https://github.com/mintusers-gr/mintusers-gr.github.io)
+
+The final site is public browseable from here: [mintusers-gr](https://mintusers-gr.github.io)
  
 ## Setup
  1. Create and configure your .env file
@@ -10,13 +13,13 @@ You can browse the generated files here:
  ```
   cp env_sample .env
   $EDITOR .env
-  ./bin/check_config.sh
+  ./bin/check-jekyll-config
   ```
 
  2. Run ```dev/machine_setup.sh``` to install virtualbox and vagrant
  
  ```
- ./bin/check_config.sh
+ ./bin/check-jekyll-config
  sudo bin/dev_machine_setup.sh
  ```
  2. Login to your new machine

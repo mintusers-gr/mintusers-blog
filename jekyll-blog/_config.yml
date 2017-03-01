@@ -45,3 +45,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - bin
+  - Readme.md

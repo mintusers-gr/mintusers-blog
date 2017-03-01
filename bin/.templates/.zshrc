@@ -41,3 +41,6 @@ cd /vagrant/jekyll-blog
 echo "\n$(tput setaf 6)Welcome to ${BOX_HOSTNAME}$(tput sgr0)"
 echo "$(tput setaf 6)The webservice URL is http://${BOX_HOSTNAME}:4000$(tput sgr0)"
 echo
+
+# I believe its better to forgive errors in interactive mode :-)
+set +e

@@ -1,6 +1,6 @@
 # Some handy bash scripts
 
-|      script          |  type  |             description              |
+|      Script          |  Type  |             Description              |
 |----------------------|:------:|--------------------------------------|
 | check-jekyll-config  | both   | Check .env for missing values        |
 | create-vagrant-box   | host   | Create a box for quick clonning      |
