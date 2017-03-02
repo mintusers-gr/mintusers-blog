@@ -9,7 +9,16 @@ You’ll find this post in your `_posts` directory. Go ahead and edit it and re-
 
 To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
 
-Jekyll also offers powerful support for code snippets:
+
+## Videos
+
+{% ted ken_robinson_says_schools_kill_creativity 640 360 %}
+
+{% vimeo 22439234 640 360 %}
+
+{% youtube 9bZkp7q19f0 640 360 %}
+
+{% ustream 6540154 640 360 %}
 
 ## Math Blocks
 inline \\(a^2 + b^2 = c^2\\) or paragrapth format $$a^2 + b^2 = c^2$$
@@ -22,6 +31,8 @@ $$ \mathbf{X}\_{n,p} = \mathbf{A}\_{n,k} \mathbf{B}\_{k,p} $$
 
 
 ## Code Blocks
+Jekyll also offers powerful support for code snippets:
+
 {% highlight ruby %}
 def print_hi(name)
   puts "Hi, #{name}"
