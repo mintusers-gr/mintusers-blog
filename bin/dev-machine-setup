@@ -58,9 +58,7 @@ else
   installAptGetPackage "virtualbox-5.1"
 fi
 
-installAptGetPackage "augeas-tools"
 
-#installAptGetPackage "vagrant"
 if [[ "$(isAptGetPackageInstall "vagrant")" = 'true' ]]
 then
     printInfo "** Vagrant has already been installed"

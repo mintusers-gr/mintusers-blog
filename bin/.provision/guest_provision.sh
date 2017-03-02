@@ -15,7 +15,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 source /vagrant/bin/.provision/utils.bash
-
+source  /vagrant/.env
 
 # Installing repositories and PPAs
 installAptGetPackage "python-software-properties"
@@ -55,7 +55,6 @@ installAptGetPackage "zsh"
 installAptGetPackage "midori"
 installAptGetPackage "gitg"
 installAptGetPackage "silversearcher-ag"
-installAptGetPackage "augeas-tools"
 
 printInfo  "** Remove orphan packages"
 apt-get -y autoremove
@@ -121,3 +120,8 @@ cp /vagrant/bin/.templates/jekyll_service /etc/init.d/jekyll_service
 chmod +x /etc/init.d/jekyll_service
 update-rc.d jekyll_service defaults
 service jekyll_service start
+
+if ! grep -q ${BOX_HOSTNAME} /etc/hosts; then
+  echo "Updating /etc/hosts for canonical name $(tput setaf 1)'${BOX_HOSTNAME}'$(tput sgr0) using ip $(tput setaf 1)${BOX_IP}$(tput sgr0)."
+  echo -e "\n ${BOX_IP} ${BOX_HOSTNAME} ${BOX_NAME}" >> /etc/hosts
+fi
