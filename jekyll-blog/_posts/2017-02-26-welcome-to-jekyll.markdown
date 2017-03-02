@@ -4,6 +4,10 @@ title:  "Welcome to my Jekyll Blog"
 date:   2017-02-26 12:39:43 +0000
 categories: jekyll update
 ---
+{% cmdblock %}
+lala
+{% endcmdblock %}
+{% command rm-rf / %}
 
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
@@ -11,14 +15,16 @@ To add new posts, simply add a file in the `_posts` directory that follows the c
 
 
 ## Videos
+You can embed videos
+ {% youtube 9bZkp7q19f0  360 640 %}
 
+Other examples
+{% highlight markdown %}{% raw %}
 {% ted ken_robinson_says_schools_kill_creativity 640 360 %}
-
 {% vimeo 22439234 640 360 %}
-
-{% youtube 9bZkp7q19f0 640 360 %}
-
+{% youtube 9bZkp7q19f0 560 315  %}
 {% ustream 6540154 640 360 %}
+{% endraw %}{% endhighlight %}
 
 ## Math Blocks
 inline \\(a^2 + b^2 = c^2\\) or paragrapth format $$a^2 + b^2 = c^2$$
