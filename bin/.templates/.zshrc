@@ -46,5 +46,5 @@ echo "$(tput setaf 6)The webservice URL is http://${BOX_HOSTNAME}:4000$(tput sgr
 echo
 
 # I believe its better to forgive errors in interactive mode :-)
-mkdir "/home/vagrant/.epiphany"
+mkdir -p "/home/vagrant/.epiphany"
 set +e

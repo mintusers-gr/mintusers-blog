@@ -58,7 +58,7 @@ installAptGetPackage "silversearcher-ag"
 installAptGetPackage "graphviz"
 installAptGetPackage "graphviz-dev"
 installAptGetPackage "gsfonts"
-
+installAptGetPackage "ditaa"
 
 printInfo  "** Remove orphan packages"
 apt-get -y autoremove

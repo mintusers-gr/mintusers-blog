@@ -66,6 +66,19 @@ print_hi('Tom')
     fontsize=10;
 {% enddigraph %}
 
+## Ditta graphs
+This needs Java but its cool!
+
+{% ditaa %}
+/----+  DAAP /-----+-----+ Audio  /--------+
+| PC |<------| RPi | MPD |------->| Stereo |
++----+       +-----+-----+        +--------+
+   |                 ^ ^
+   |     ncmpcpp     | | mpdroid /---------+
+   +--------=--------+ +----=----| Nexus S |
+                                 +---------+
+{% endditaa %}
+
 More info : [plugin docs](https://github.com/kui/jekyll-graphviz)
 
 ## More info
