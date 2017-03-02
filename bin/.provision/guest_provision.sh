@@ -52,7 +52,7 @@ installAptGetPackage "zlib1g-dev"
 installAptGetPackage "wget"
 installAptGetPackage "curl"
 installAptGetPackage "zsh"
-installAptGetPackage "midori"
+installAptGetPackage "epiphany-browser"
 installAptGetPackage "gitg"
 installAptGetPackage "silversearcher-ag"
 
@@ -98,10 +98,7 @@ set -e
 if [ ! -d /home/vagrant/.oh-my-zsh ] ; then
   sudo -u vagrant -H sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
-
-if [ ! -f /home/vagrant/.zshrc ] ; then
-  sudo -u vagrant cp /vagrant/bin/.templates/.zshrc /home/vagrant
-fi
+sudo -u vagrant cp /vagrant/bin/.templates/.zshrc /home/vagrant
 
 printInfo  "** Customize motd"
 rm -f /etc/update-motd.d/10-help-text

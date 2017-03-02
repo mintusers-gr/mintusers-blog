@@ -24,7 +24,7 @@ fi
 
 export ZSH=/home/vagrant/.oh-my-zsh
 export EDITOR='vim'
-export BROWSER='midori'
+export BROWSER='epiphany-browser'
 
 ZSH_THEME="robbyrussell"
 plugins=(git github ruby)
@@ -37,7 +37,8 @@ unalias ag 2>/dev/null
 # Some useful aliases
 alias yard-server="yard server --gems --port 5000 --bind 0.0.0.0"
 alias update-zshrc="cp /vagrant/bin/.templates/.zshrc /home/vagrant/.zshrc"
-alias firefox='midori'
+alias firefox='epiphany-browser'
+alias blog-open="${BROWSER}  --profile /home/vagrant/.epiphany -a http://${BOX_HOSTNAME}:4000 >/dev/null 2>&1 &"
 
 cd /vagrant/jekyll-blog
 echo "\n$(tput setaf 6)Welcome to ${BOX_HOSTNAME}$(tput sgr0)"
@@ -45,4 +46,5 @@ echo "$(tput setaf 6)The webservice URL is http://${BOX_HOSTNAME}:4000$(tput sgr
 echo
 
 # I believe its better to forgive errors in interactive mode :-)
+mkdir "/home/vagrant/.epiphany"
 set +e
