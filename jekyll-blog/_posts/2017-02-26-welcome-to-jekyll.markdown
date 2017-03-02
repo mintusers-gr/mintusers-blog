@@ -11,6 +11,17 @@ To add new posts, simply add a file in the `_posts` directory that follows the c
 
 Jekyll also offers powerful support for code snippets:
 
+## Math Blocks
+inline \\(a^2 + b^2 = c^2\\) or paragrapth format $$a^2 + b^2 = c^2$$
+
+some complex examples
+
+\\[ \mathbf{X} = \mathbf{Z} \mathbf{P^\mathsf{T}} \\]
+
+$$ \mathbf{X}\_{n,p} = \mathbf{A}\_{n,k} \mathbf{B}\_{k,p} $$
+
+
+## Code Blocks
 {% highlight ruby %}
 def print_hi(name)
   puts "Hi, #{name}"
@@ -19,8 +30,36 @@ print_hi('Tom')
 #=> prints 'Hi, Tom' to STDOUT.
 {% endhighlight %}
 
+## And Graphs
+
+{% digraph some digraph title %}
+    rankdir=LR;
+    size="8"
+    node [shape = doublecircle]; LR_0 LR_3 LR_4 LR_8;
+    node [shape = circle];
+    LR_0 -> LR_2 [ label = "SS(B)" ];
+    LR_0 -> LR_1 [ label = "SS(S)" ];
+    LR_1 -> LR_3 [ label = "S($end)" ];
+    LR_2 -> LR_6 [ label = "SS(b)" ];
+    LR_2 -> LR_5 [ label = "SS(a)" ];
+    LR_2 -> LR_4 [ label = "S(A)" ];
+    LR_5 -> LR_7 [ label = "S(b)" ];
+    LR_5 -> LR_5 [ label = "S(a)" ];
+    LR_6 -> LR_6 [ label = "S(b)" ];
+    LR_6 -> LR_5 [ label = "S(a)" ];
+    LR_7 -> LR_8 [ label = "S(b)" ];
+    LR_7 -> LR_5 [ label = "S(a)" ];
+    LR_8 -> LR_6 [ label = "S(b)" ];
+    LR_8 -> LR_5 [ label = "S(a)" ];
+    overlap=false;
+    fontsize=10;
+{% enddigraph %}
+
+More info : [plugin docs](https://github.com/kui/jekyll-graphviz)
+
+## More info
 Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
 
-[jekyll-docs]: http://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+[jekyll-docs](http://jekyllrb.com/docs/home)
+[jekyll-gh](https://github.com/jekyll/jekyll)
+[jekyll-talk](https://talk.jekyllrb.com/)

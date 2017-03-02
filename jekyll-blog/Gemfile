@@ -2,6 +2,7 @@ source "https://rubygems.org"
 ruby RUBY_VERSION
 
 gem 'jekyll', '~> 3.4'
+gem 'classifier-reborn'
 
 group :jekyll_plugins do
   gem 'jekyll-last-modified-at'
@@ -12,6 +13,8 @@ group :jekyll_plugins do
   gem 'jekyll-seo-tag'
   gem 'jekyll-sitemap'
   gem 'jemoji'
+  # Theme
   gem 'minima'
-  gem 'jekyll-sitemap'
+  # Graphviz support
+  gem 'jekyll-graphviz'
 end

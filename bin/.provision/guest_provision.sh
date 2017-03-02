@@ -55,6 +55,10 @@ installAptGetPackage "zsh"
 installAptGetPackage "epiphany-browser"
 installAptGetPackage "gitg"
 installAptGetPackage "silversearcher-ag"
+installAptGetPackage "graphviz"
+installAptGetPackage "graphviz-dev"
+installAptGetPackage "gsfonts"
+
 
 printInfo  "** Remove orphan packages"
 apt-get -y autoremove
