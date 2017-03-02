@@ -15,7 +15,7 @@ user="vagrant"
 
 name=`basename $0`
 pid_file="/vagrant/.vagrant/$name.pid"
-stdout_log="/vagrant/.vagrant/$name.log"
+stdout_log="/dev/null"
 stderr_log="/vagrant/.vagrant/$name.err"
 
 get_pid() {

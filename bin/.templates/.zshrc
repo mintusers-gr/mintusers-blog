@@ -37,7 +37,7 @@ unalias ag 2>/dev/null
 # Some useful aliases
 alias yard-server="yard server --gems --port 5000 --bind 0.0.0.0"
 alias update-zshrc="cp /vagrant/bin/.templates/.zshrc /home/vagrant/.zshrc"
-
+alias firefox='midori'
 
 cd /vagrant/jekyll-blog
 echo "\n$(tput setaf 6)Welcome to ${BOX_HOSTNAME}$(tput sgr0)"
