@@ -15,6 +15,7 @@ group :jekyll_plugins do
   gem 'jemoji'
   # Theme
   gem 'minima'
+
   # Graphviz support
   gem 'jekyll-graphviz'
 end

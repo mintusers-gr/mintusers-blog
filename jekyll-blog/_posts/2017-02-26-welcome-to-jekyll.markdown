@@ -74,6 +74,7 @@ print_hi('Tom')
     fontsize=10;
 {% enddigraph %}
 
+
 ## Ditta graphs
 This needs Java but its cool!
 
