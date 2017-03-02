@@ -11,13 +11,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   max_memory = `grep 'MemTotal' /proc/meminfo | sed -e 's/MemTotal://' -e 's/ kB//'`.to_i / 1024
   BOX_MEM = ENV['BOX_MEM'] || max_memory / 4
 
-  # Manage /etc/hosts file
-  config.hostmanager.enabled = true
-  config.hostmanager.manage_host = true
-  config.hostmanager.manage_guest = true
-  config.hostmanager.ignore_private_ip = false
-  config.hostmanager.include_offline = true
-
 
   config.vm.provider :virtualbox do |vb, override|
     host = RbConfig::CONFIG["host_os"]
@@ -38,12 +31,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     machine.vm.network 'private_network', ip: BOX_IP
 
-    machine.hostmanager.aliases = [ BOX_HOSTNAME ]
   end
 
   # This will copy the hub command from host to guest
   config.vm.provision "file", source: "/usr/local/bin/hub", destination: "hub"
-  config.vm.provision :shell, path: "bin/.provision/machine_provision.sh", keep_color: true
+  config.vm.provision :shell, path: "bin/.provision/guest_provision.sh", keep_color: true
+  config.vm.provision :host_shell do |host_shell|
+    host_shell.inline = '`pwd`/bin/.provision/host_provision.sh'
+  end
 
   # So you can use your private keys inside the box
   config.ssh.forward_agent = true

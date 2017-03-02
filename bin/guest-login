@@ -22,12 +22,16 @@ case ${guest_status} in
   ;;
 "saved")
   echo "$(tput setaf 3)Machine is suspended. Lets restore ...$(tput sgr0)"
-  vagrant resume
+  vagrant up
   vagrant ssh
   ;;
 "running")
   echo "$(tput setaf 2)Logging to guest$(tput sgr0)"
   vagrant ssh
+  ;;
+"")
+  echo "$(tput setaf 1)** Seems that there is no guest machine$(tput sgr0)"
+  echo "$(tput setaf 1)** Have ypu follow the instructions to create one?$(tput sgr0)"
   ;;
 *)
   echo "$(tput setaf 1)** Can't login to guest. Status: ${guest_status} $(tput sgr0)"

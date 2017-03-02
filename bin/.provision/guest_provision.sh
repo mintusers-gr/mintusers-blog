@@ -52,9 +52,10 @@ installAptGetPackage "zlib1g-dev"
 installAptGetPackage "wget"
 installAptGetPackage "curl"
 installAptGetPackage "zsh"
-installAptGetPackage "firefox"
+installAptGetPackage "midori"
 installAptGetPackage "gitg"
 installAptGetPackage "silversearcher-ag"
+installAptGetPackage "augeas-tools"
 
 printInfo  "** Remove orphan packages"
 apt-get -y autoremove
@@ -79,9 +80,11 @@ geminstall github
 geminstall github_cli
 
 # SSH for github
+echo "$(tput setaf 1)A password may be asked to unlock SSH key storage. It is safe$(tput sgr0)"
 ssh-keyscan -H github.com >> ~/.ssh/known_hosts 2> /dev/null
 set +e
 # This command will always fail
+echo "$(tput setaf 2)Trying to ssh-ing at github.com$(tput sgr0)"
 ssh -T git@github.com
 set -e
 
@@ -90,7 +93,9 @@ printInfo  "** Setup hub tool"
 mv /home/vagrant/hub /usr/local/bin/
 
 printInfo  "** Setup ZSH"
-chsh vagrant -s /usr/bin/zsh
+set +e
+sudo -u vagrant chsh -s /usr/bin/zsh
+set -e
 if [ ! -d /home/vagrant/.oh-my-zsh ] ; then
   sudo -u vagrant -H sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi

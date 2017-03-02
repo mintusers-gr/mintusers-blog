@@ -58,6 +58,8 @@ else
   installAptGetPackage "virtualbox-5.1"
 fi
 
+installAptGetPackage "augeas-tools"
+
 #installAptGetPackage "vagrant"
 if [[ "$(isAptGetPackageInstall "vagrant")" = 'true' ]]
 then
@@ -71,11 +73,11 @@ fi
 
 
 installVagrantPlugin "vagrant-vbguest"
-installVagrantPlugin "vagrant-hostmanager"
 installVagrantPlugin "vagrant-env"
+installVagrantPlugin "vagrant-host-shell"
 
 #TODO all users
-if [ $SUDO_USER ]; then user=$SUDO_USER; else user=`whoami`; fi
+if [ ${SUDO_USER} ]; then user=${SUDO_USER}; else user=`whoami`; fi
 suder_file="/etc/sudoers.d/vagrant_hostmanager"
 if [ ! -f "${suder_file}" ]
 then
@@ -96,7 +98,7 @@ then
   ./install
   popd > /dev/null
 else
-  printInfo "** Hub tool is allready installed"
+  printInfo "** Hub tool is already installed"
 fi
 
 printInfo "### INSTALLATION DONE ###"

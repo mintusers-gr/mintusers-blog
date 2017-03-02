@@ -12,9 +12,19 @@ fi
 export PATH="/vagrant/jekyll-blog/bin:/vagrant/bin:$PATH"
 source /vagrant/.env
 check-jekyll-config
+if [ ! -f /home/vagrant/.gitconfig ]
+then
+  git config --global user.email "${GIT_EMAIL}"
+  git config --global user.name  "${GIT_NAME}"
+  git config --global color.ui true
+  git config --global push.default simple
+  echo "$(tput setaf 3)~/.gitcongig file is created check it for sanity$(tput sgr0)"
+fi
+
 
 export ZSH=/home/vagrant/.oh-my-zsh
 export EDITOR='vim'
+export BROWSER='midori'
 
 ZSH_THEME="robbyrussell"
 plugins=(git github ruby)
@@ -28,14 +38,6 @@ unalias ag 2>/dev/null
 alias yard-server="yard server --gems --port 5000 --bind 0.0.0.0"
 alias update-zshrc="cp /vagrant/bin/.templates/.zshrc /home/vagrant/.zshrc"
 
-if [ ! -f /home/vagrant/.gitconfig ]
-then
-  git config --global user.email "${GIT_EMAIL}"
-  git config --global user.name  "${GIT_NAME}"
-  git config --global color.ui true
-  git config --global push.default simple
-  echo "$(tput setaf 3)~/.gitcongig file is created check it for sanity$(tput sgr0)"
-fi
 
 cd /vagrant/jekyll-blog
 echo "\n$(tput setaf 6)Welcome to ${BOX_HOSTNAME}$(tput sgr0)"

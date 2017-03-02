@@ -35,7 +35,6 @@ The final site is public browseable from here: [mintusers-gr](https://mintusers-
 $ vagrant up                      # To start the VM
 $ vagrant ssh                     # To login into the VM
 $ vagrant suspend                 # To suspend the VM
-$ vagrant resume                  # To resume a suspended VM
 $ vagrant provision               # To provision(setup) the machine
 $ vagrant halt                    # To stop VM
 $ vagrant destroy                 # To destroy VM completely
