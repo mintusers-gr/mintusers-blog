@@ -11,7 +11,8 @@ fi
 
 export PATH="/vagrant/bin:$PATH"
 source /vagrant/.env
-check-jekyll-config
+check-config
+
 if [ ! -f /home/vagrant/.gitconfig ]
 then
   git config --global user.email "${GIT_EMAIL}"
@@ -38,6 +39,7 @@ alias yard-server="yard server --gems --port 5000 --bind 0.0.0.0"
 alias update-zshrc="cp /vagrant/bin/.templates/.zshrc /home/vagrant/.zshrc"
 alias firefox='epiphany-browser'
 alias blog-open="${BROWSER}  --profile /home/vagrant/.epiphany -a http://${BOX_HOSTNAME}:4000 >/dev/null 2>&1 &"
+alias blog-serve="ruby -run -ehttpd /vagrant/build -p4000"
 
 cd /vagrant
 echo "\n$(tput setaf 6)Welcome to ${BOX_HOSTNAME}$(tput sgr0)"

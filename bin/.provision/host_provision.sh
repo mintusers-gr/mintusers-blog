@@ -10,7 +10,7 @@ then
 fi
 
 source .env
-`pwd`/bin/check-jekyll-config
+`pwd`/bin/check-config
 
 if ! grep -q ${BOX_HOSTNAME} /etc/hosts; then
   echo "Updating /etc/hosts for $(tput setaf 1)'${BOX_NAME}'$(tput sgr0) canonical $(tput setaf 1)'${BOX_HOSTNAME}'$(tput sgr0) using ip $(tput setaf 1)${BOX_IP}$(tput sgr0)."

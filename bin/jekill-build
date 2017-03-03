@@ -10,7 +10,7 @@ then
 fi
 
 source /vagrant/.env
-/vagrant/bin/check-jekyll-config
+/vagrant/bin/check-config
 cd /vagrant
 
 echo -e "$(tput setaf 5)*************************************************$(tput sgr0)"

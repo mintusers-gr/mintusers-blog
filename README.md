@@ -13,13 +13,13 @@ The final site is public browseable from here: [mintusers-gr](https://mintusers-
  ```
   cp env_sample .env
   $EDITOR .env
-  ./bin/check-jekyll-config
+  ./bin/check-config
   ```
 
  2. Run ```dev/machine_setup.sh``` to install virtualbox and vagrant
  
  ```
- ./bin/check-jekyll-config
+ ./bin/check-config
  sudo bin/dev_machine_setup.sh
  ```
  2. Login to your new machine

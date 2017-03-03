@@ -11,7 +11,7 @@ fi
 
 vagrant_dir="$(dirname "${BASH_SOURCE[0]}")/.."
 source "${vagrant_dir}/.env"
-${vagrant_dir}/bin/check-jekyll-config
+${vagrant_dir}/bin/check-config
 
 guest_status=$(vagrant global-status | grep "${BOX_NAME}" | awk '{print $4}')
 case ${guest_status} in
