@@ -1,24 +1,32 @@
-### Jekyll ###
+# environment
+# Never let your secrets goes public
+.env
+
+# Jekyll
 www/
+www-ready/
+
+# Generated images
+jekyll-blog/images/ditaa/
+
+# Jekyll artifacts
 .sass-cache/
 .jekyll-metadata
 
-### JetBrains ###
-.idea/
-
-
-### bundler ###
+# Bundler artifacts
 jekyll-blog/.bundle/
 jekyll-blog/bin/
 
-### environment ###
-.env
 
-### Vagrant ###
+# Vagrant artifacts and boxes
 .vagrant/
 .boxes/
 tmp
 
-## Generated images ##
-jekyll-blog/images/ditaa/
 
+## Notes not for the repository
+__note_*__.md
+__note_*__.txt
+
+# IDEs
+.idea/

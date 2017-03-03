@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -e
+
+if [ ! -d /vagrant ]
+then
+  echo "$(tput setaf 6)*************************************************$(tput sgr0)"
+  echo "$(tput setaf 6)*   Please run Jekyll only inside guest         *$(tput sgr0)"
+  echo "$(tput setaf 6)*************************************************$(tput sgr0)"
+  exit
+fi
+
+source /vagrant/.env
+/vagrant/bin/check-jekyll-config
+cd /vagrant/jekyll-blog
+
+echo -e "$(tput setaf 5)*************************************************$(tput sgr0)"
+echo -e "$(tput setaf 5)*          Building Production site             *$(tput sgr0)"
+echo -e "$(tput setaf 5)*************************************************$(tput sgr0)"
+
+# We use a plugin so no need for --force_polling
+JEKYLL_ENV=production bin/jekyll build --destination ../www-ready --trace
+if [ 0 -ne $? ]; then
+  echo -e "$(tput setaf 1)Build failed :-($(tput sgr0)\n"
+  exit
+fi;
+
+echo -e "\n\n"
+echo -e "$(tput setaf 5)*************************************************$(tput sgr0)"
+echo -e "$(tput setaf 5)*  Serving production site to local preview     *$(tput sgr0)"
+echo -e "$(tput setaf 5)*************************************************$(tput sgr0)"
+echo "$(tput setaf 6)The webservice URL is http://${BOX_HOSTNAME}:4000$(tput sgr0)"
+
+# Kill everything that use port 4000
+set +e
+fuser -k 4000/tcp
+set -e
+
+cd /vagrant/www-ready
+ruby -run -ehttpd . -p4000

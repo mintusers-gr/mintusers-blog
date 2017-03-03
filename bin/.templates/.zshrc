@@ -47,3 +47,5 @@ echo
 # I believe its better to forgive errors in interactive mode :-)
 mkdir -p "/home/vagrant/.epiphany"
 set +e
+echo -e "You may like to run '$(tput setaf 6)start-jekyll$(tput sgr0)' to to take control."
+echo -e "You may like to run '$(tput setaf 6)blog-open$(tput sgr0)' to view the blog.\n"

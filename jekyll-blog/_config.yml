@@ -55,9 +55,20 @@ gems:
   - jekyll-sitemap
   - jekyll-last-modified-at
   - jemoji
+  - jekyll-assets
 
 reload_port: 5678
 theme: minima
+
+assets:
+  cache: '/tmp/jekyll-asset-cache'
+  autoprefixer:
+    browsers: ["last 2 versions","> 5%","IE 9"]
+
+# Cleaner directory structure but slower builds
+sass:
+  cache_location: '/tmp/jekyll-asset-cache-sass'
+
 exclude:
   - Gemfile
   - Gemfile.lock

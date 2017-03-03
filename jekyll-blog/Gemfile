@@ -4,6 +4,21 @@ ruby RUBY_VERSION
 gem 'jekyll', '~> 3.4'
 gem 'classifier-reborn'
 
+#
+# Asset pipeline
+#
+gem 'jekyll-assets'
+gem 'coffee-script' # We want to write our javascripts in CoffeeScript
+gem 'uglifier'      # And we want our javascripts to be minified with UglifyJS
+gem 'sass'          # And we want to write our stylesheets using SCSS/SASS
+gem 'mini_magick'   # Image magick support
+gem 'bootstrap-sass'
+gem 'compass-core'
+gem 'font-awesome-sass'
+gem 'autoprefixer-rails' # Use 'Can I Use database' database and add prefixes
+gem 'jekyll-press'
+gem 'octopress-minify-html'
+
 group :jekyll_plugins do
   gem 'jekyll-last-modified-at'
   gem 'jekyll-livereload'
@@ -18,4 +33,9 @@ group :jekyll_plugins do
 
   # Graphviz support
   gem 'jekyll-graphviz'
+
+  # Commands
+  # https://github.com/jekyll/jekyll-compose
+  gem 'jekyll-compose'
+
 end

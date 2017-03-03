@@ -4,7 +4,7 @@ set -e
 if [ -d /vagrant ]
 then
   echo "$(tput setaf 6)*************************************************$(tput sgr0)"
-  echo "$(tput setaf 6)*         You are allready logged dude!         *$(tput sgr0)"
+  echo "$(tput setaf 6)*         You are already logged dude!          *$(tput sgr0)"
   echo "$(tput setaf 6)*************************************************$(tput sgr0)"
   exit
 fi
@@ -18,7 +18,7 @@ case ${guest_status} in
 "poweroff")
   echo "$(tput setaf 4)Machine is power off. Power ON ...$(tput sgr0)"
   vagrant up
-  vagarnt ssh
+  vagrant ssh
   ;;
 "saved")
   echo "$(tput setaf 3)Machine is suspended. Lets restore ...$(tput sgr0)"
