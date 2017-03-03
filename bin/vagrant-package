@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -e
+
+if [ -d /vagrant ]
+then
+  echo "$(tput setaf 6)*************************************************$(tput sgr0)"
+  echo "$(tput setaf 6)* Don't run this on the virtual machine please! *$(tput sgr0)"
+  echo "$(tput setaf 6)*************************************************$(tput sgr0)"
+  exit
+fi
+
+function goto_repo_root() {
+  local -r gitroot=$(git rev-parse --show-cdup)
+  if [ "$gitroot" != "" ]
+  then
+    if [ "$gitroot" != "$HOME" ]
+    then
+      cd "$gitroot"
+    fi
+  fi
+}
+
+BOX_FILE="jekyll"
+
+goto_repo_root
+
+if [ ! -f "${BOX_FILE}.box" ]
+then
+  echo "$(tput setaf 6)### Creating a vagrant box ###$(tput sgr0)"
+  echo "$(tput setaf 6)### This will take allot of time ....$(tput sgr0)"
+  vagrant package --output "${BOX_FILE}.box"
+  echo "$(tput setaf 6)Done$(tput sgr0)"
+
+  echo ""
+  echo "To register the new box type:"
+  echo "  vagrant box add ${BOX_FILE} ${BOX_FILE}.box"
+  echo "To restart the new box type:"
+  echo "  vagrant up"
+else
+  echo "$(tput setaf 6)The box ${BOX_FILE}.box already exists.$(tput sgr0)"
+  echo -e "Delete that file and optionaly update version first."
+  echo -e "type: rm .boxes/${BOX_FILE}.box\n"
+fi

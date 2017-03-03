@@ -112,7 +112,7 @@ cp /vagrant/bin/.templates/50-landscape-sysinfo /etc/update-motd.d/50-landscape-
 run-parts /etc/update-motd.d/ > /dev/null
 
 printInfo "** Updating local Gemfile"
-cd /vagrant/jekyll-blog
+cd /vagrant/site
 sudo -u vagrant -H bundle install --binstubs --quiet
 bundle show
 

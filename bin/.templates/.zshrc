@@ -9,7 +9,7 @@ then
   exit  1
 fi
 
-export PATH="/vagrant/jekyll-blog/bin:/vagrant/bin:$PATH"
+export PATH="/vagrant/bin:$PATH"
 source /vagrant/.env
 check-jekyll-config
 if [ ! -f /home/vagrant/.gitconfig ]
@@ -39,7 +39,7 @@ alias update-zshrc="cp /vagrant/bin/.templates/.zshrc /home/vagrant/.zshrc"
 alias firefox='epiphany-browser'
 alias blog-open="${BROWSER}  --profile /home/vagrant/.epiphany -a http://${BOX_HOSTNAME}:4000 >/dev/null 2>&1 &"
 
-cd /vagrant/jekyll-blog
+cd /vagrant
 echo "\n$(tput setaf 6)Welcome to ${BOX_HOSTNAME}$(tput sgr0)"
 echo "$(tput setaf 6)The webservice URL is http://${BOX_HOSTNAME}:4000$(tput sgr0)"
 echo
@@ -47,5 +47,5 @@ echo
 # I believe its better to forgive errors in interactive mode :-)
 mkdir -p "/home/vagrant/.epiphany"
 set +e
-echo -e "You may like to run '$(tput setaf 6)start-jekyll$(tput sgr0)' to to take control."
+echo -e "You may like to run '$(tput setaf 6)jekyll-serve$(tput sgr0)' to to take control."
 echo -e "You may like to run '$(tput setaf 6)blog-open$(tput sgr0)' to view the blog.\n"

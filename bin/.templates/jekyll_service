@@ -10,7 +10,7 @@
 ### END INIT INFO
 
 dir="/vagrant"
-cmd="/vagrant/bin/start-jekyll"
+cmd="/vagrant/bin/jekyll-serve"
 user="vagrant"
 
 name=`basename $0`

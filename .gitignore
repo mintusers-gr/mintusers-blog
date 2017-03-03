@@ -2,31 +2,19 @@
 # Never let your secrets goes public
 .env
 
-# Jekyll
-www/
-www-ready/
+# Generated site
+build
 
-# Generated images
-jekyll-blog/images/ditaa/
-
-# Jekyll artifacts
-.sass-cache/
-.jekyll-metadata
-
-# Bundler artifacts
-jekyll-blog/.bundle/
-jekyll-blog/bin/
-
+# Build/Artifacts
+.asset-cache
+.bundle
 
 # Vagrant artifacts and boxes
 .vagrant/
-.boxes/
-tmp
-
-
-## Notes not for the repository
-__note_*__.md
-__note_*__.txt
+*.box
 
 # IDEs
 .idea/
+
+# REMOVE THIS
+site/_posts

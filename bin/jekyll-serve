@@ -11,7 +11,7 @@ fi
 
 source /vagrant/.env
 /vagrant/bin/check-jekyll-config
-cd /vagrant/jekyll-blog
+cd /vagrant
 
 # Kill everything that use port 4000
 set +e
@@ -25,6 +25,5 @@ echo -e "$(tput setaf 6)The webservice URL is:\n   http://${BOX_HOSTNAME}:4000$(
 
 # We use a plugin so no need for --force_polling
 LISTEN_GEM_DEBUGGING=1 bin/jekyll serve  --watch \
-    --destination ../www \
     --livereload \
     --host 0.0.0.0
