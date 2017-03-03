@@ -35,5 +35,5 @@ set +e
 fuser -k 4000/tcp
 set -e
 
-cd /vagrant
+cd /vagrant/build
 ruby -run -ehttpd . -p4000
