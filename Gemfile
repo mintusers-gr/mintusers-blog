@@ -12,7 +12,8 @@ group :jekyll_plugins do
   gem 'jekyll-redirect-from'
   gem 'jekyll-browsersync'
   gem 'jekyll-compose'
-  gem 'jekyll-graphviz'
+  gem 'jemoji'
+
   # Liquid tags
   gem 'jekyll-graphviz'
   # Development

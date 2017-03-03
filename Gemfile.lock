@@ -30,6 +30,10 @@ GEM
       sass (>= 3.2)
     forwardable-extended (2.6.0)
     fspath (3.0.3)
+    gemoji (2.1.0)
+    html-pipeline (2.5.0)
+      activesupport (>= 2)
+      nokogiri (>= 1.4)
     html-proofer (3.4.0)
       activesupport (>= 4.2, < 6.0)
       addressable (~> 2.3)
@@ -91,6 +95,10 @@ GEM
       jekyll (~> 3.3)
     jekyll-watch (1.5.0)
       listen (~> 3.0, < 3.1)
+    jemoji (0.6.2)
+      gemoji (~> 2.0)
+      html-pipeline (~> 2.2)
+      jekyll (>= 3.0)
     kramdown (1.13.2)
     liquid (3.0.6)
     listen (3.0.8)
@@ -146,6 +154,7 @@ DEPENDENCIES
   jekyll-redirect-from
   jekyll-seo-tag
   jekyll-sitemap
+  jemoji
   uglifier
 
 BUNDLED WITH
