@@ -26,7 +26,7 @@ module Jekyll
 
     def render(context)
       txt = super
-      '<div class="command-blk" ">'+ txt +'</div>'
+      '<div class="command-blk">'+ txt +'</div>'
     end
   end
 

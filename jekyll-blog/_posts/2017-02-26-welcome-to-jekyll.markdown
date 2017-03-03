@@ -4,6 +4,20 @@ title:  "Welcome to my Jekyll Blog"
 date:   2017-02-26 12:39:43 +0000
 categories: jekyll update
 ---
+
+## Emojis
+:banana: :watermelon:  :warning: :stars: :scream:
+
+I give this plugin two :+1:!
+<kbd>Shift</kbd>+<kbd>Enter</kbd>
+
+{% kbd shift cmd V %}
+
+{% kbd ctl alt left %}
+
+
+http://www.webpagefx.com/tools/emoji-cheat-sheet/
+
 {% cmdblock %}
 lala
 {% endcmdblock %}

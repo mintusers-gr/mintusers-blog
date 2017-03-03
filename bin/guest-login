@@ -37,3 +37,6 @@ case ${guest_status} in
   echo "$(tput setaf 1)** Can't login to guest. Status: ${guest_status} $(tput sgr0)"
   ;;
 esac
+
+echo -e "\nBack to '$(tput setaf 3)$(hostname)$(tput sgr0)' machine. Thanks for the visit. :-)"
+echo -e "You may like to run '$(tput setaf 6)vagrant suspend$(tput sgr0)' to suspend the virtual machine.\n"

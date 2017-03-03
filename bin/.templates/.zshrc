@@ -27,12 +27,11 @@ export EDITOR='vim'
 export BROWSER='epiphany-browser'
 
 ZSH_THEME="robbyrussell"
-plugins=(git github ruby)
+plugins=(git github ruby command-not-found gem rake-fast bundler dotenv)
 source $ZSH/oh-my-zsh.sh
 
 # Use hub and not git
 eval "$(hub alias -s)"
-unalias ag 2>/dev/null
 
 # Some useful aliases
 alias yard-server="yard server --gems --port 5000 --bind 0.0.0.0"
