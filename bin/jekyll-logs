@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+
+multitail -cT ansi -f /var/log/jekyll/jekyll.log -cT ansi -f /var/log/jekyll/liveserver.log

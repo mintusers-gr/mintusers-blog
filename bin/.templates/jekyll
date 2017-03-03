@@ -10,13 +10,13 @@
 ### END INIT INFO
 
 dir="/vagrant"
-cmd="/vagrant/bin/jekyll-serve"
+cmd="bundle exec jekyll build --incremental --watch"
 user="vagrant"
 
 name=`basename $0`
-pid_file="/vagrant/.vagrant/$name.pid"
-stdout_log="/dev/null"
-stderr_log="/vagrant/.vagrant/$name.err"
+pid_file="/tmp/$name.pid"
+stdout_log="/var/log/jekyll/$name.log"
+stderr_log="/var/log/jekyll/$name.err"
 
 get_pid() {
     cat "$pid_file"
@@ -66,7 +66,7 @@ case "$1" in
         else
             echo "Stopped"
             if [ -f "$pid_file" ]; then
-                rm "$pid_file"
+                sudo rm "$pid_file"
             fi
         fi
     else

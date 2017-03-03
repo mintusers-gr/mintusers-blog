@@ -59,6 +59,9 @@ installAptGetPackage "graphviz"
 installAptGetPackage "graphviz-dev"
 installAptGetPackage "gsfonts"
 installAptGetPackage "ditaa"
+installAptGetPackage "ccze"
+installAptGetPackage "multitail"
+installAptGetPackage "inotify-tools"
 
 printInfo  "** Remove orphan packages"
 apt-get -y autoremove
@@ -67,20 +70,10 @@ printInfo  "** Update System gems"
 gem update --system
 geminstall bundler
 geminstall nokogiri
-geminstall haml
-geminstall html2haml
-geminstall rouge
-geminstall redcarpet
 geminstall yard
 geminstall pry
-geminstall guard
 geminstall bropages
 geminstall jekyll
-geminstall github-pages
-geminstall middleman
-geminstall puma
-geminstall github
-geminstall github_cli
 
 # SSH for github
 echo "$(tput setaf 1)A password may be asked to unlock SSH key storage. It is safe$(tput sgr0)"
@@ -95,14 +88,21 @@ set -e
 printInfo  "** Setup hub tool"
 mv /home/vagrant/hub /usr/local/bin/
 
-printInfo  "** Setup ZSH"
-set +e
-sudo -u vagrant chsh -s /usr/bin/zsh
-set -e
-if [ ! -d /home/vagrant/.oh-my-zsh ] ; then
-  sudo -u vagrant -H sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+printInfo  "** Create log directory"
+mkdir -p /var/log/jekyll
+chown vagrant /var/log/jekyll
+
+printInfo  "** Setup live-server"
+if [ ! -f /usr/bin/live-server ]
+then
+  npm install -g live-server
 fi
-sudo -u vagrant cp /vagrant/bin/.templates/.zshrc /home/vagrant
+sudo -u vagrant ln -sf /vagrant/bin/.templates/.live-server.json /home/vagrant
+ln -sf /vagrant/bin/.templates/liveserver /etc/init.d/liveserver
+chmod +x /etc/init.d/liveserver
+update-rc.d liveserver defaults
+service liveserver start
+
 
 printInfo  "** Customize motd"
 rm -f /etc/update-motd.d/10-help-text
@@ -112,17 +112,28 @@ cp /vagrant/bin/.templates/50-landscape-sysinfo /etc/update-motd.d/50-landscape-
 run-parts /etc/update-motd.d/ > /dev/null
 
 printInfo "** Updating local Gemfile"
-cd /vagrant/site
-sudo -u vagrant -H bundle install --binstubs --quiet
+cd /vagrant
+sudo -u vagrant -H bundle install --quiet
 bundle show
 
 printInfo "** Run as service at startup"
-cp /vagrant/bin/.templates/jekyll_service /etc/init.d/jekyll_service
-chmod +x /etc/init.d/jekyll_service
-update-rc.d jekyll_service defaults
-service jekyll_service start
+ln -sf /vagrant/bin/.templates/jekyll /etc/init.d/jekyll
+chmod +x /etc/init.d/jekyll
+update-rc.d jekyll defaults
+service jekyll start
 
 if ! grep -q ${BOX_HOSTNAME} /etc/hosts; then
   echo "Updating /etc/hosts for canonical name $(tput setaf 1)'${BOX_HOSTNAME}'$(tput sgr0) using ip $(tput setaf 1)${BOX_IP}$(tput sgr0)."
   echo -e "\n ${BOX_IP} ${BOX_HOSTNAME} ${BOX_NAME}" >> /etc/hosts
 fi
+
+printInfo  "** Setup ZSH"
+if [ ! -d /home/vagrant/.oh-my-zsh ] ; then
+  sudo -u vagrant -H sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+sudo -u vagrant ln -sf /vagrant/bin/.templates/.zshrc /home/vagrant
+usermod -s /usr/bin/zsh vagrant
+
+printInfo  "** Server status"
+echo "Jekyll :" $(service jekyll status)
+echo "Live server :" $(service liveserver status)

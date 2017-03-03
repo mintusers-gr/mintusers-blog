@@ -27,7 +27,7 @@ GEM
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
     fastimage (2.1.0)
-    ffi (1.9.17)
+    ffi (1.9.18)
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
     forwardable-extended (2.6.0)

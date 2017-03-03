@@ -33,4 +33,6 @@ group :assets do
 end
 
 # development gems
-gem 'html-proofer'
+group :development do
+  gem 'html-proofer'
+end

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+
+function server_status() {
+  echo "$(tput setaf 3)Services status:$(tput sgr0)"
+  echo "  $(tput setaf 6)Jekyll     :$(tput sgr0)" $(service jekyll status)
+  echo "  $(tput setaf 6)Liveserver :$(tput sgr0)" $(service liveserver status)
+
+  status=$(service jekyll status)
+  if [ "$status" == "Stopped" ]
+  then
+    tail /var/log/jekyll/jekyll.err
+  fi
+}
+
+function restart_services() {
+  sudo service jekyll restart > /dev/null
+  server_status
+}
+
+server_status
+echo "$(tput setaf 3)Watching _config.yml$(tput sgr0)"
+
+# Wait for change
+# The change attrib (atime) is a good way
+while inotifywait -qq -e ATTRIB /vagrant/_config.yml; do
+  echo "$(tput setaf 3)** Change detected$(tput sgr0)"
+  restart_services
+done
