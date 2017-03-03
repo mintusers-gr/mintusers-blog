@@ -10,9 +10,13 @@ group :jekyll_plugins do
   gem 'jekyll-seo-tag'
   gem 'jekyll-paginate'
   gem 'jekyll-redirect-from'
+  gem 'jekyll-gist'
   gem 'jekyll-browsersync'
   gem 'jekyll-compose'
   gem 'jemoji'
+
+  # theme
+  gem 'minima'
 
   # Liquid tags
   gem 'jekyll-graphviz'
@@ -28,7 +32,5 @@ group :assets do
   gem 'uglifier'
 end
 
-group :development do
-  gem 'html-proofer'
-  # gem 's3_website'
-end
+# development gems
+gem 'html-proofer'

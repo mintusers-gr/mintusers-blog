@@ -39,7 +39,7 @@ alias yard-server="yard server --gems --port 5000 --bind 0.0.0.0"
 alias update-zshrc="cp /vagrant/bin/.templates/.zshrc /home/vagrant/.zshrc"
 alias firefox='epiphany-browser'
 alias blog-open="${BROWSER}  --profile /home/vagrant/.epiphany -a http://${BOX_HOSTNAME}:4000 >/dev/null 2>&1 &"
-alias static-serve="ruby -run -ehttpd /vagrant/build -p4000"
+alias static-serve="ruby -run -ehttpd /vagrant/_build -p4000"
 
 cd /vagrant
 echo "\n$(tput setaf 6)Welcome to ${BOX_HOSTNAME}$(tput sgr0)"

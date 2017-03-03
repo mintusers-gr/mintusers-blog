@@ -1,9 +1,15 @@
+# Theme
+theme: minima
+
 # Site settings
 title: Matthew Loberg
 tagline: Software Engineer
 description: "Software Engineer from Minnesota"
 url: "http://mlo.io"
 baseurl: ""
+
+twitter_username: jekyllrb
+github_username:  jekyll
 
 author:
   name: Matthew Loberg
@@ -66,7 +72,7 @@ google_analytics_id: UA-9585810-14
 
 # Build settings
 source: site
-destination: build
+destination: _build
 permalink: /blog/:year/:month/:day/:title.html
 markdown: kramdown
 highlighter: rouge
@@ -87,3 +93,5 @@ assets:
     browsers:
       - "last 2 versions"
       - "IE > 9"
+
+reload_port: 5678

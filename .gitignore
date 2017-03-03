@@ -3,7 +3,7 @@
 .env
 
 # Generated site
-build
+_build
 
 # Build/Artifacts
 .asset-cache
