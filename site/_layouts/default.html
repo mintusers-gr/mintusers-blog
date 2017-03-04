@@ -4,21 +4,22 @@ layout: compress
 
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
-
+  <!-- Include Head begin -->
   {% include head.html %}
-
+  <!-- Include Head end -->
   <body>
-
+    <!-- Include Header begin -->
     {% include header.html %}
-
+    <!-- Include Header end -->
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
+        <!-- Begin main content -->
         {{ content }}
+        <!-- End main content -->
       </div>
     </main>
-
+    <!-- Include Footer begin -->
     {% include footer.html %}
-
+    <!-- Include Footer end -->
   </body>
-
 </html>

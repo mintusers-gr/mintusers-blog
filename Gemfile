@@ -11,7 +11,7 @@ group :jekyll_plugins do
   gem 'jekyll-paginate'
   gem 'jekyll-redirect-from'
   gem 'jekyll-gist'
-  gem 'jekyll-browsersync'
+  # TODO: Make my own
   gem 'jekyll-compose'
   gem 'jemoji'
 
