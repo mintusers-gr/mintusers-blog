@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+set -e
+
+function echo_in_color() {
+  echo -en "$(tput setaf ${1})${2}$(tput sgr0)"
+}
+
+if [ ! -d /vagrant ]
+then
+  echo_in_color 3 "*** Please run me only inside guest OS.\n"
+  exit
+fi
+
+function build_site() {
+  sudo service liveserver stop > /dev/null
+  sudo service jekyll stop > /dev/null
+
+  cd /vagrant
+
+  echo_in_color 3 "** Building Production site.\n"
+  JEKYLL_ENV=production bundle exec jekyll build  --trace
+  if [ 0 -ne $? ]; then
+    eecho_in_color 3 1 "Build failed :-(\n"
+    exit
+  fi;
+
+  echo_in_color 3 "** Valling jekyll doctor.\n"
+  bundle exec jekyll doctor
+
+  echo_in_color 3 "** Compressing files.\n"
+  find /vagrant/_build/ -iname '*.html' -exec gzip -n -k -f {} +
+  find /vagrant/_build/ -iname '*.js'   -exec gzip -n -k -f {} +
+  find /vagrant/_build/ -iname '*.css'  -exec gzip -n -k -f {} +
+
+  /vagrant/bin/services-restart
+}
+
+run_html_doctor="no"
+run_build="yes"
+GETOPTS=`getopt -o chn --long no-build --long help --long  check -- "$@"`
+eval set -- "$GETOPTS"
+
+# TODO: doctor and gzip as binary flags
+while true ; do
+  case "$1" in
+    -c|--check)
+        run_html_doctor="yes"
+        shift ;;
+    -n|--no-build)
+        run_build="no"
+        shift ;;
+    -h|--help)
+      echo "Usage:"
+      echo "  -c --check      Check site using html doctor (default: no)"
+      echo "  -c --no-build   Build optimize site (default: yes)"
+      exit ;;
+    --) shift; break ;;
+  esac
+done
+
+if [ "$run_build" == "yes" ]; then
+  build_site
+fi
+
+if [ "$run_html_doctor" == "yes" ]; then
+  echo_in_color 3 "** Checking Production site for errors.\n"
+  bundle exec htmlproofer _build  --check-opengraph --disable-external
+fi
+
+
+
+
