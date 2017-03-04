@@ -42,8 +42,8 @@ runAptGetUpdate "$((1 * 60 * 60))"
 # Install packages
 installAptGetPackage "nodejs"
 installAptGetPackage "build-essential"
-installAptGetPackage "ruby2.4"
-installAptGetPackage "ruby2.4-dev"
+installAptGetPackage "ruby2.2"
+installAptGetPackage "ruby2.2-dev"
 installAptGetPackage "ruby-switch"
 installAptGetPackage "git"
 installAptGetPackage "language-pack-el"
@@ -131,13 +131,14 @@ fi
 printInfo  "** Setup logrotate"
 ln -sf /vagrant/bin/.templates/jekyll_log_rotate /etc/logrotate.d/jekyll_log_rotate
 
-
+set +e
 printInfo  "** Setup ZSH"
 if [ ! -d /home/vagrant/.oh-my-zsh ] ; then
   sudo -u vagrant -H sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 sudo -u vagrant ln -sf /vagrant/bin/.templates/.zshrc /home/vagrant
 usermod -s /usr/bin/zsh vagrant
+set -e
 
 printInfo  "** Setup Timezone"
 timedatectl set-timezone Europe/Athens
