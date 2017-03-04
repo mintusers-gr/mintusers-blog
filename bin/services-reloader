@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+function echo_in_color() {
+  echo -en "$(tput setaf ${1})${2}$(tput sgr0)"
+}
+
+if [ ! -d /vagrant ]
+then
+  echo_in_color 3 "*** Please run me only inside guest OS.\n"
+  exit
+fi
+
+jekyll_status=$(service jekyll status)
+live_status=$(service liveserver status)
+
+if ! [[ "$live_status" == "Running"  &&  "$jekyll_status" == "Running" ]]; then
+  echo_in_color 1 "Error: Services not already running.\n"
+  echo_in_color 3 "Run the command 'services-restart' to reload them\n"
+fi
+
+# Wait for change
+# The change attrib (atime) is a good way
+echo "$(tput setaf 3)Watching _config.yml and Gemfile.lock$(tput sgr0)"
+while inotifywait -qq -e ATTRIB /vagrant/_config.yml /vagrant/Gemfile.lock; do
+  echo_in_color  3 "** Change detected\n"
+  /vagrant/bin/services-restart
+done
+

@@ -3,7 +3,10 @@
 # vi: set ft=bash :
 # autoenv module usually do this, but just in case
 # Load configuration
-source .env
+
+if [ -f $(git rev-parse --show-cdup)/.env ] ; then
+  source $(git rev-parse --show-cdup)/.env
+fi
 
 # No one likes cows
 export ANSIBLE_NOCOWS=1

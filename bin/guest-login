@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+function echo_in_color() {
+  echo -e "$(tput setaf ${1})${2}$(tput sgr0)"
+}
+
 if [ -d /vagrant ]
 then
   echo "$(tput setaf 6)*************************************************$(tput sgr0)"
@@ -9,9 +13,15 @@ then
   exit
 fi
 
-vagrant_dir="$(dirname "${BASH_SOURCE[0]}")/.."
-source "${vagrant_dir}/.env"
-${vagrant_dir}/bin/check-config
+gitroot=$(git rev-parse --show-cdup)
+if [ "$gitroot" != "" ]; then
+  if [ "$gitroot" != "$HOME" ]; then
+    cd "$gitroot"
+  fi
+fi
+
+bin/check-config
+source .env
 
 guest_status=$(vagrant global-status | grep "${BOX_NAME}" | awk '{print $4}')
 case ${guest_status} in

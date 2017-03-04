@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+function echo_in_color() {
+  echo -en "$(tput setaf ${1})${2}$(tput sgr0)"
+}
+
+if [ ! -d /vagrant ]
+then
+  echo_in_color 3 "*** Please run me only inside guest OS.\n"
+  exit
+fi
+
+echo_in_color 4 "Restarting services ...\n"
+sudo rm -f /var/log/jekyll/*.err
+sudo service liveserver restart > /dev/null
+sudo service jekyll restart > /dev/null
+
+/vagrant/bin/services-status --show-logs

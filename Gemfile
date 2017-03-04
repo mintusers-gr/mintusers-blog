@@ -20,8 +20,6 @@ group :jekyll_plugins do
 
   # Liquid tags
   gem 'jekyll-graphviz'
-  # Development
-  gem 'jekyll-livereload'
 end
 
 group :assets do

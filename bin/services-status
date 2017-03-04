@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+function echo_in_color() {
+  echo -en "$(tput setaf ${1})${2}$(tput sgr0)"
+}
+
+if [ ! -d /vagrant ]
+then
+  echo_in_color 3 "*** Please run me only inside guest OS.\n"
+  exit
+fi
+
+function print_status() {
+  if [ "$1" == "Running" ]
+  then
+    echo_in_color 2 "☀ $1"
+  else
+    echo_in_color 1 "⚡ $1"
+  fi
+}
+
+function wait_dots() {
+  for run in {1..8}
+  do
+    sleep 0.5
+    printf "."
+  done
+  printf "\n"
+}
+
+function show_log() {
+  echo_in_color 1 "Problem in paradise\n"
+  echo_in_color 3 "=== Log file ===\n"
+  cat /var/log/jekyll/jekyll.err
+  echo_in_color 3 "=== End Log file: ===\n"
+}
+
+
+GETOPTS=`getopt -o lh --long help --long show-logs -- "$@"`
+eval set -- "$GETOPTS"
+
+while true ; do
+  case "$1" in
+    -l|--show-logs)
+        echo -ne "Checking service status "
+        wait_dots
+        jekyll_status=$(service jekyll status)
+        if [ "$jekyll_status" != "Running" ] ; then
+          show_log
+        fi
+        shift ;;
+    -h|--help)
+      echo "--show-logs(-l)   Show logs"
+      exit ;;
+    --) shift; break ;;
+  esac
+done
+
+echo_in_color 3 "Service status\n"
+jekyll_status=$(service jekyll status)
+echo_in_color 3 "  Jekyll     :  "
+print_status $jekyll_status
+echo
+
+live_status=$(service liveserver status)
+echo_in_color 3 "  Liveserver :  "
+print_status $live_status
+echo

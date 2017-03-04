@@ -42,5 +42,4 @@ echo "\n$(tput setaf 6)Welcome to ${BOX_HOSTNAME}$(tput sgr0)"
 echo "$(tput setaf 6)The webservice URL is http://${BOX_HOSTNAME}:4000$(tput sgr0)"
 echo
 
-#echo -e "You may like to run '$(tput setaf 6)jekyll-serve$(tput sgr0)' to to take control."
-#echo -e "You may like to run '$(tput setaf 6)blog-open$(tput sgr0)' to view the blog.\n"
+/vagrant/bin/services-status

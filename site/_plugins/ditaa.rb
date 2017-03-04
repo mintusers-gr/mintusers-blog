@@ -6,7 +6,7 @@ module Jekyll
   module Tags
     class DitaaBlock < Liquid::Block
 
-      @@debug = false
+      @@debug = true
 
       @@output_dir = "/images/ditaa"
       def self.output_dir
