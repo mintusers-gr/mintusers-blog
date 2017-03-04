@@ -122,10 +122,15 @@ chmod +x /etc/init.d/jekyll
 update-rc.d jekyll defaults
 service jekyll start
 
+printInfo  "** Update /etc/hosts"
 if ! grep -q ${BOX_HOSTNAME} /etc/hosts; then
   echo "Updating /etc/hosts for canonical name $(tput setaf 1)'${BOX_HOSTNAME}'$(tput sgr0) using ip $(tput setaf 1)${BOX_IP}$(tput sgr0)."
   echo -e "\n ${BOX_IP} ${BOX_HOSTNAME} ${BOX_NAME}" >> /etc/hosts
 fi
+
+printInfo  "** Setup logrotate"
+ln -sf /vagrant/bin/.templates/jekyll_log_rotate /etc/logrotate.d/jekyll_log_rotate
+
 
 printInfo  "** Setup ZSH"
 if [ ! -d /home/vagrant/.oh-my-zsh ] ; then

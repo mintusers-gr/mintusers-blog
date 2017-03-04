@@ -1,0 +1,12 @@
+ /var/log/jekyll/*.log {
+        rotate 2
+        daily
+        missingok
+        compress
+        delaycompress
+        sharedscripts
+        postrotate
+                /usr/sbin/service jekyll restart
+                /usr/sbin/service liveserver restart
+        endscript
+}
