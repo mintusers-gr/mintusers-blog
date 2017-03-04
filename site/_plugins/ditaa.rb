@@ -25,7 +25,7 @@ module Jekyll
 
       def initialize(tag_name, options, tokens)
         super
-        @ditaa_exists = system('which ditaa > /dev/null 2>&1')
+        @ditaa_exists = true
         @ditaa_options = options
         if @ditaa_options.include? "--alt"
           @alt_text = @ditaa_options.scan(/--alt "([^"]*)"/).last.first
@@ -84,7 +84,7 @@ module Jekyll
             f = Tempfile.new('ditaa')
             f.write(source)
             f.close
-            @png_exists = system('ditaa ' + f.path + ' ' + png_path + args)
+            @png_exists = system('/vagrant/bin/ditaa ' + f.path + ' ' + png_path + args)
             f.unlink  # cleanup of temporary file
           end
         end

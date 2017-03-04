@@ -21,7 +21,7 @@ github_username:  jekyll
 future: true
 drafts: true
 
-# Produce an index for related posts.
+# Produce an index for related _posts.
 # Requires the classifier-reborn plugin.
 lsi: true
 

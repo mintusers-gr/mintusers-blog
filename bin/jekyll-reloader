@@ -32,6 +32,7 @@ function server_status() {
   fi
 
   echo ""
+  date +"%d %a %b %l:%M"
   echo "$(tput setaf 3)Services status: $(tput sgr0)"
   printf "  $(tput setaf 6)Jekyll     : $(tput sgr0)"
   print_status ${jekyll_status}

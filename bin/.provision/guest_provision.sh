@@ -139,6 +139,9 @@ fi
 sudo -u vagrant ln -sf /vagrant/bin/.templates/.zshrc /home/vagrant
 usermod -s /usr/bin/zsh vagrant
 
+printInfo  "** Setup Timezone"
+timedatectl set-timezone Europe/Athens
+
 printInfo  "** Server status"
 echo "Jekyll :" $(service jekyll status)
 echo "Live server :" $(service liveserver status)
