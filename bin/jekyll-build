@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 function echo_in_color() {
   echo -en "$(tput setaf ${1})${2}$(tput sgr0)"
@@ -11,60 +10,112 @@ then
   exit
 fi
 
-function build_site() {
+function do_build_site() {
   sudo service liveserver stop > /dev/null
   sudo service jekyll stop > /dev/null
 
   cd /vagrant
-
   echo_in_color 3 "** Building Production site.\n"
   JEKYLL_ENV=production bundle exec jekyll build  --trace
   if [ 0 -ne $? ]; then
     eecho_in_color 3 1 "Build failed :-(\n"
     exit
   fi;
+}
 
-  echo_in_color 3 "** Valling jekyll doctor.\n"
+function do_restart_services() {
+  /vagrant/bin/services-restart
+}
+
+function do_doctor() {
+  echo_in_color 3 "** Checking using jekyll doctor.\n"
+  cd /vagrant
   bundle exec jekyll doctor
+}
 
+function do_compress() {
   echo_in_color 3 "** Compressing files.\n"
   find /vagrant/_build/ -iname '*.html' -exec gzip -n -k -f {} +
   find /vagrant/_build/ -iname '*.js'   -exec gzip -n -k -f {} +
   find /vagrant/_build/ -iname '*.css'  -exec gzip -n -k -f {} +
-
-  /vagrant/bin/services-restart
 }
 
-run_html_doctor="no"
+function do_proof() {
+  echo_in_color 3 "** Checking Production site for errors.\n"
+  bundle exec htmlproofer _build  --check-opengraph --disable-e
+}
+
+function do_show_usage() {
+      echo "Usage:"
+      echo "  -b --no-build   Build optimize site (default: yes)"
+      echo "  -d --doctor     Run jekyll doctor"
+      echo "  -g --gzip       Gzip assets"
+      echo "  -p --proof      Bulletproof html"
+      echo "  -r --restart    Restart the services"
+      echo "  -A --all        Do all tasks"
+      echo "  -h --help       It's a mystery"
+      echo "Note: Jekyll service will stop unless --no-build"
+}
+
 run_build="yes"
-GETOPTS=`getopt -o chn --long no-build --long help --long  check -- "$@"`
+run_doctor="no"
+run_proof="no"
+run_gzip="no"
+run_restart="no"
+
+GETOPTS=`getopt -o bdgprhA --long all --long no-build --long doctor --long gzip --long proof --long no-restart --long help -- "$@"`
 eval set -- "$GETOPTS"
 
-# TODO: doctor and gzip as binary flags
 while true ; do
   case "$1" in
-    -c|--check)
-        run_html_doctor="yes"
-        shift ;;
-    -n|--no-build)
+    -b|--no-build)
         run_build="no"
         shift ;;
+    -A|--all)
+        run_build="yes"
+        run_doctor="yes"
+        run_proof="yes"
+        run_gzip="yes"
+        run_restart="yes"
+        shift ;;
+    -d|--doctor)
+        run_doctor="yes"
+        shift ;;
+    -g|--gzip)
+        run_gzip="yes"
+        shift ;;
+    -p|--proof)
+        run_proof="yes"
+        shift ;;
+    -r|--restart)
+        run_proof="yes"
+        shift ;;
     -h|--help)
-      echo "Usage:"
-      echo "  -c --check      Check site using html doctor (default: no)"
-      echo "  -c --no-build   Build optimize site (default: yes)"
-      exit ;;
+        do_show_usage
+        exit ;;
     --) shift; break ;;
   esac
 done
 
 if [ "$run_build" == "yes" ]; then
-  build_site
+  do_build_site
 fi
 
-if [ "$run_html_doctor" == "yes" ]; then
-  echo_in_color 3 "** Checking Production site for errors.\n"
-  bundle exec htmlproofer _build  --check-opengraph --disable-external
+if [ "$run_restart" == "yes" ]; then
+  do_restart_services
+fi
+
+if [ "$run_doctor" == "yes" ]; then
+  do_doctor
+fi
+
+if [ "$run_gzip" == "yes" ]; then
+  do_compress
+fi
+
+
+if [ "$run_proof" == "yes" ]; then
+  do_proof
 fi
 
 

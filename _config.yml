@@ -93,3 +93,6 @@ assets:
     browsers:
       - "last 2 versions"
       - "IE > 9"
+assets:
+  cache: ".tmp/.asset-cache"
+  digest: true
