@@ -34,3 +34,5 @@ end
 group :development do
   gem 'html-proofer'
 end
+
+gem "pry"

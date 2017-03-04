@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+require 'active_support'
+Dir.chdir "/vagrant"
+
+results= Hash.new()
+result=`bundle list -V`
+
+line_no=-3
+gem = Hash.new()
+all_gems =Array.new()
+result.each_line do |line|
+  line_no+=1
+  next if line_no < 0
+  # print "#{line_no}: #{line}"
+
+  if line_no % 4 ==0 then
+    # BEGIN
+    gem = Hash.new()
+    items = line.strip.split
+    gem[:name] = items[1]
+    gem[:version] = items[2].slice(1,items[2].length-2)
+  end
+
+  if line_no % 4 ==1 then
+    # print "#{line_no}: #{line}"
+    description=line.gsub("Summary:","").strip
+    gem[:description] = description
+
+  end
+
+  if line_no % 4 ==2 then
+     items = line.strip.split
+     homepage=items[1]
+     gem[:homepage] = homepage.to_s
+  end
+
+
+  if line_no % 4 ==3 then
+    items = line.strip.split(":")
+     status=items[1]
+     gem[:status]=status.to_s.strip
+
+    # END GEM
+    all_gems.push gem
+  end
+end
+
+max_names=all_gems.map{|x| x[:name].length}.max
+max_description=all_gems.map{|x| x[:description].length}.max
+max_homepage=all_gems.map{|x| x[:homepage].length}.max
+desc_size=[max_description, max_homepage].max
+version_size=9
+
+
+File.open('/vagrant/Gems.md', 'w') do |f|
+  f.write "# Gems used in this project \n\n"
+
+  # f.write "| #{"Gem".center(max_names)} | #{"Gem".center(desc_size)} | #{"Vesrion".center(version_size)} |\n"
+  # f.write "|-#{"-"*max_names}-|-#{"-"*desc_size}-|-#{"-"*version_size}-|\n"
+  f.write "| Gem | Description | Version |\n"
+  f.write "| --- | ----------- | ------- |\n"
+  all_gems.each do |gem|
+    f.write "| #{gem[:name]} | #{gem[:description]}<br/><a href='#{gem[:homepage]}' target='_blank'>#{gem[:homepage]}</a>|#{gem[:version]}|\n"
+  end
+end

@@ -7,9 +7,9 @@ function echo_in_color() {
 
 if [ -d /vagrant ]
 then
-  echo "$(tput setaf 6)*************************************************$(tput sgr0)"
-  echo "$(tput setaf 6)*         You are already logged dude!          *$(tput sgr0)"
-  echo "$(tput setaf 6)*************************************************$(tput sgr0)"
+  echo_in_color 6  "*************************************************"
+  echo_in_color 6  "*         You are already logged dude!          *"
+  echo_in_color 6  "*************************************************"
   exit
 fi
 
@@ -23,30 +23,34 @@ fi
 bin/check-config
 source .env
 
+# Pre heat hack
+echo_in_color 3 "Checking guest OS status ..."
+vagrant status > /dev/null
 guest_status=$(vagrant global-status | grep "${BOX_NAME}" | awk '{print $4}')
+
 case ${guest_status} in
 "poweroff")
-  echo "$(tput setaf 4)Machine is power off. Power ON ...$(tput sgr0)"
+  echo_in_color 3 "Machine '${BOX_NAME}'is power off. Power ON ..."
   vagrant up
   vagrant ssh
   ;;
 "saved")
-  echo "$(tput setaf 3)Machine is suspended. Lets restore ...$(tput sgr0)"
+  echo_in_color 3 "Machine '${BOX_NAME}'is suspended. Lets restore ..."
   vagrant up
   vagrant ssh
   ;;
 "running")
-  echo "$(tput setaf 2)Logging to guest$(tput sgr0)"
+  echo_in_color 3 "Logging to guest OS '${BOX_NAME}' ..."
   vagrant ssh
   ;;
 "")
-  echo "$(tput setaf 1)** Seems that there is no guest machine$(tput sgr0)"
-  echo "$(tput setaf 1)** Have ypu follow the instructions to create one?$(tput sgr0)"
+  echo_in_color 1 "* Seems that there is no guest machine"
+  echo_in_color 1 "** Have yuu follow the instructions to create one?"
   ;;
 *)
-  echo "$(tput setaf 1)** Can't login to guest. Status: ${guest_status} $(tput sgr0)"
+  echo_in_color 1 "** Can't login to guest. Status: ${guest_status} "
   ;;
 esac
 
 echo -e "\nBack to '$(tput setaf 3)$(hostname)$(tput sgr0)' machine. Thanks for the visit. :-)"
-echo -e "You may like to run '$(tput setaf 6)vagrant suspend$(tput sgr0)' to suspend the virtual machine.\n"
+echo -e "You may like to run '$(tput setaf 6)vagrant suspend$(tput sgr0)' to suspend the virtual machine."
