@@ -1,29 +1,75 @@
 #!/usr/bin/env bash
 
+function wait() {
+  for run in {1..5}
+  do
+    sleep 0.5
+    printf "."
+  done
+  printf "\n"
+}
+
+function print_status() {
+  if [ "$1" == "Running" ]
+  then
+    printf "$(tput setaf 2)☀ $1$(tput sgr0)"
+  else
+    printf "$(tput setaf 1)⚡ $1$(tput sgr0)"
+  fi
+  echo ""
+}
 
 function server_status() {
-  echo "$(tput setaf 3)Services status:$(tput sgr0)"
-  echo "  $(tput setaf 6)Jekyll     :$(tput sgr0)" $(service jekyll status)
-  echo "  $(tput setaf 6)Liveserver :$(tput sgr0)" $(service liveserver status)
+  jekyll_status=$(service jekyll status)
+  live_status=$(service liveserver status)
 
-  status=$(service jekyll status)
-  if [ "$status" == "Stopped" ]
+  if [ "$jekyll_status" == "Stopped" ]
   then
+    echo -e "$(tput setaf 4)\nProblem in paradise\nSeems Jekyll have ... issues ...$(tput sgr0)"
+    echo -e "$(tput setaf 1)=== Log file: ===$(tput sgr0)"
     tail /var/log/jekyll/jekyll.err
+    echo -e "$(tput setaf 1)=== End Log file: ===$(tput sgr0)"
   fi
+
+  echo ""
+  echo "$(tput setaf 3)Services status: $(tput sgr0)"
+  printf "  $(tput setaf 6)Jekyll     : $(tput sgr0)"
+  print_status ${jekyll_status}
+  printf "  $(tput setaf 6)Liveserver : $(tput sgr0)"
+  print_status ${live_status}
+  echo ""
+
 }
 
 function restart_services() {
-  sudo service jekyll restart > /dev/null
+  jekyll_status=$( service jekyll status)
+  if [ "$jekyll_status" == "Stopped" ]
+  then
+    sudo service jekyll start
+    wait
+  else
+    sudo service jekyll restart
+    wait
+  fi
   server_status
 }
 
+
+jekyll_status=$( service jekyll status)
+if [ "$jekyll_status" == "Stopped" ]
+then
+  printf  "$(tput setaf 2)Jekyll service is stop. Trying to recover$(tput sgr0)\n"
+  sudo rm /var/log/jekyll/jekyll.err
+  sudo service jekyll start
+  wait
+fi
+
 server_status
-echo "$(tput setaf 3)Watching _config.yml$(tput sgr0)"
 
 # Wait for change
 # The change attrib (atime) is a good way
-while inotifywait -qq -e ATTRIB /vagrant/_config.yml; do
+echo "$(tput setaf 3)Watching _config.yml and bundle$(tput sgr0)"
+while inotifywait -qq -e ATTRIB /vagrant/_config.yml /vagrant/Gemfile.lock; do
   echo "$(tput setaf 3)** Change detected$(tput sgr0)"
   restart_services
 done
