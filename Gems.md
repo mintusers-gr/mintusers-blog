@@ -73,3 +73,4 @@
 | tzinfo | Daylight savings aware timezone library<br/><a href='http://tzinfo.github.io' target='_blank'>http://tzinfo.github.io</a>|1.2.2|
 | uglifier | Ruby wrapper for UglifyJS JavaScript compressor<br/><a href='http://github.com/lautis/uglifier' target='_blank'>http://github.com/lautis/uglifier</a>|3.1.3|
 | yell | Yell - Your Extensible Logging Library<br/><a href='http://rudionrailspec.github.com/yell' target='_blank'>http://rudionrailspec.github.com/yell</a>|2.0.7|
+| zalgo | G̵̢̤̥̝̟͕ͨ̎e̡̘̣͎̿ͣ̑́̐̂̀͌n̶̻ͩͧ͐e̟̞͆̔ͬͥ͋̄ͯ̔͝r̴̻̱͙͎̬ͪ͐ͯaͤͧ҉_̴̼̪͓͍̥t̸̵̤͇͂̎͐̈ͬ̉e͍̩̠̖̳̗͐ͧ͗̇͊͂̀ṣ̯̝̳̗͌ͮ͞ͅ ̣̄̊ż̳̩̠̮͕̖̠̲͂̏̅ạͫ͜ͅl̛̞͕͆͛̀̃̐͐ͦ͞ͅg̢̼̻̼͓̪͂ͬ̿ͪͤ̐̐̐͟ȏ̦͇͕ͥͧ̆.̸͓̻̜̩̗͙̇ͭ̎̅ͧͩ͑̐<br/><a href='http://github.com/alexyoung/zalgo' target='_blank'>http://github.com/alexyoung/zalgo</a>|0.0.4|

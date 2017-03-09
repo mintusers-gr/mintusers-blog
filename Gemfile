@@ -3,6 +3,10 @@ source 'https://rubygems.org'
 gem 'jekyll'
 gem 'chronic'
 
+gem 'zalgo'
+  
+gem "pry"
+
 group :jekyll_plugins do
   gem 'jekyll-sitemap'
   gem 'jekyll-assets'
@@ -34,5 +38,3 @@ end
 group :development do
   gem 'html-proofer'
 end
-
-gem "pry"

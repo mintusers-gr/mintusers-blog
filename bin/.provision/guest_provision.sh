@@ -103,6 +103,10 @@ chmod +x /etc/init.d/liveserver
 update-rc.d liveserver defaults
 service liveserver start
 
+printInfo  "** Installing uncss"
+if [ ! -f /usr/bin/uncss ]; then
+  npm install -g uncss
+fi
 
 printInfo  "** Customize motd"
 rm -f /etc/update-motd.d/10-help-text

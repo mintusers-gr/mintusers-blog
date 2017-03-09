@@ -74,15 +74,7 @@ installVagrantPlugin "vagrant-vbguest"
 installVagrantPlugin "vagrant-env"
 installVagrantPlugin "vagrant-host-shell"
 
-#TODO all users
-if [ ${SUDO_USER} ]; then user=${SUDO_USER}; else user=`whoami`; fi
-suder_file="/etc/sudoers.d/vagrant_hostmanager"
-if [ ! -f "${suder_file}" ]
-then
-  printInfo "** Fix sudo to enable editing of /etc/hosts without password (${suder_file})"
-  echo "Cmnd_Alias VAGRANT_HOSTMANAGER_UPDATE = /bin/cp /home/${user}/.vagrant.d/tmp/hosts.local /etc/hosts" > $suder_file
-  echo "adm ALL=(root) NOPASSWD: VAGRANT_HOSTMANAGER_UPDATE" >> $suder_file
-fi
+
 
 hubfile_url="https://github.com/github/hub/releases/download/v2.3.0-pre9/hub-linux-amd64-2.3.0-pre9.tgz"
 hubfile_file="hub-linux-amd64-2.3.0-pre9.tgz"
